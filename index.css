@@ -1,0 +1,283 @@
+html{
+    overflow-x: hidden;
+    text-align: center;
+}
+
+/* Total Body */
+body{
+    font-family :Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+
+/* Global */
+.container{
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden; 
+}
+
+
+
+/* Header */
+header{
+    /* add background image */
+    background-image: url('images/gold_on_black_7.jpg');
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    text-align: left; 
+    padding-top: 30px;
+    padding: 39px;
+    min-height: 50px; 
+    position: relative fixed;
+    margin-top: 0px;
+    margin-bottom: -20px;
+    margin-left: -10px;
+} 
+
+/* Header a = links at nav */
+header a{
+    color: gold;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-decoration: none;
+}
+/* Header a = links at nav */
+header nav{
+    position: absolute;
+    background-color: black;
+    position: block;
+    top: 100%;
+}
+
+header nav ul{ 
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: black;
+}
+
+header nav li{
+    color: black;
+}
+
+/* Branding =  my name */
+header #branding{
+    float: left;
+    font-size: 15px;
+    padding: 0;
+    color: black;
+    text-emphasis: none;
+    text-decoration: none;
+}
+   
+.intro{
+    background-image: url(images/me_3.0.jpg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px;
+    padding-bottom: 50px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    height: 475px;
+    opacity: 0.8;
+    position: relative;
+    top: 20px;
+    text-shadow: 4px 3px 6px gold;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+
+
+h1, h2{
+    font-weight: 200;
+    margin: 0;
+}
+
+.intro .hello{
+    font-size: 2rem;
+}
+.intro h1{
+    font-size: 3.1rem;
+}
+
+.intro h2{
+    font-size: 1.2rem;
+}
+
+/* Cursor */
+.txt-type > .txt {
+    border-right: 0.2rem solid red;
+    color:  red
+}
+
+/* anything over 1200px */
+@media(min-width: 1200px){
+    .container {
+        padding: 0px;
+    }
+    h1{
+        font-size: 1.9rem;
+    }
+
+    h2{
+        font-size: 1.6rem;
+    }
+    p{
+        font-size: 0.9rem;
+    }
+}
+
+/* anything over 800px */
+@media(max-width: 800px){
+    .container {
+        padding: 0 3rem;
+    }
+    h1{
+        font-size: 1.9rem;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    p{
+        font-size: 1.2rem;
+    }
+}
+
+@media(max-width: 500px) {
+    
+    .container {
+        padding: 0.3rem;
+    }
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.7rem;
+    }
+}
+
+#boxes{
+    background-image: url('images/gold_on_black_7.jpg');
+    background-size: 1530px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    min-height: 700px;
+    margin-top: 39px;
+    margin-bottom: 20px;
+    
+}
+
+ul{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    flex: 1;
+    text-align: center;
+}
+
+h2 p{
+    white-space: nowrap;
+}
+
+#box p{
+    margin: 21px;
+
+}
+
+footer{
+    background: black;
+    min-height: 110px;
+    margin: -20px;
+    font-size: 15px;
+    margin-bottom: -6rem;
+    padding-bottom: 12px;
+}
+
+
+footer p{
+    margin: 20px;
+    margin-right: 2.4rem;
+    margin-top: 1.2rem;
+    float: right;
+    font-size: 16px;
+}
+
+
+footer h2 b{
+    background: black;
+    height: 60px;
+    margin-top: 20px; 
+    font-size: 12px;
+    float: left;
+    margin-bottom: -20px;
+    margin-left: 30px;
+}
+
+footer a{
+  display: inline;
+}
+
+.fa{
+    margin-top: -2rem;
+    margin-bottom: -1.2rem;
+    text-align: right;
+    text-decoration: none;
+    margin: 17px;
+}
+
+.fa:hover{
+    opacity: 0.8;
+    font-weight: bold;
+    color: gold;
+}
+
+.fa-twitter{
+    margin: 10px;
+    float: right;
+    margin-top: 2.9rem;
+    margin-right: -1.9rem;
+    color: white;
+}
+
+.fa-instagram{
+    margin: 30px;
+    float: right;
+    margin-top: 2.9rem;
+    margin-right: -5rem;
+    color: white;
+}
+
+.fa-youtube-play{
+    margin: 10px;
+    float: right;
+    margin-top: 2.9rem;
+    margin-right: 1.2rem;
+    color: white;
+}
+

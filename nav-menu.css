@@ -1,0 +1,107 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#menu{
+  width: 35px;
+  height: 30px;
+  margin: 30px 0 20px 20px;
+  cursor: pointer;
+}
+
+#menu-bar{
+ margin-left: -40px;
+ position: fixed;
+}
+
+.bar{
+  height: 5px;
+  width: 33px;
+  background-color: gold;
+  display: block;
+  border-radius: 5px;
+  transition: 0.7s ease;
+  
+}
+
+#bar1{
+  transform: translateY(-4px);
+}
+
+#bar3{
+  transform: translateY(4px);
+}
+
+.nav li a{
+  color: white;
+  text-decoration: none;
+}
+
+.nav li a:hover{
+  font-weight: bold;
+}
+
+.nav li{
+  list-style: none;
+  padding: 16px 0;
+}
+
+.nav{
+  padding: 0;
+  margin-right: 70px;
+  transition: 0.7s ease;
+  display: none;
+  position: fixed;
+  margin-top: -40px;
+} 
+
+.menu-bg, #menu-bar{
+  padding-right: 50px;
+  top: 27px;
+  right: 0;
+  position: absolute;
+  position: fixed;
+}
+
+.menu-bg{
+  z-index: 1;
+  width: 0;
+  height: 0;
+  /* top right bottom left */
+  margin: 30px 0 20px 20px;
+  background: radial-gradient(circle,red , gold);
+  border-radius: 50%;
+  transition: 0.7s ease;
+ 
+}
+
+#menu-bar{
+  z-index: 2;
+}
+.change-bg{
+  width: 550px;
+  height: 530px;
+  /* top right bottom left */ 
+  transform: translate(60%, -20% );
+}
+
+.change .bar{
+  background-color: white;
+}
+
+.change #bar1{
+  transform: translateY(4px) rotateZ(-45deg);
+}
+
+.change #bar3{
+  transform: translateY(-6px) rotate(45deg);
+}
+
+.change #bar2{
+  opacity: 0;
+}
+
+.change{
+  display: block;
+}
+
