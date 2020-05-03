@@ -28,7 +28,7 @@ body{
 
 /* Header */
 header{
-    /* add background image */
+    overflow: hidden;
     background-image: url('images/gold_on_black_7.jpg');
     background-position: bottom;
     background-size: cover;
