@@ -89,6 +89,10 @@ nav a.active {
     max-width: 600px;
 }
 
+.home-content span {
+    color: gold;
+}
+
 .home-content h3 {
     font-size: 40px;
     font-weight: 700;
