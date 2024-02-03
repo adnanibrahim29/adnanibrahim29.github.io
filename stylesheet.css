@@ -714,6 +714,7 @@ nav a.active {
     .about {
         grid-template-columns: 1fr;
         padding: 0 10%;
+        padding-bottom: 20%;
     }
 
     .about-text {
