@@ -156,6 +156,7 @@ nav a.active {
     animation: slideLeft 1s ease forwards;
     animation-delay: calc(.2s * var(--i));
     margin: 30px 15px 30px 0;
+    
 }
 
 .home-sci a:hover {
@@ -704,6 +705,8 @@ nav a.active {
         margin-top: 30px;
         margin-bottom: 30px;
         flex-direction: row;
+        display: flex;
+        justify-content: center;
     }
 
     .home-sci a {
@@ -722,7 +725,6 @@ nav a.active {
     }
 
     .about-text h2 {
-        padding-top: 20px;
         font-size: 50px;
     }
     
@@ -740,11 +742,14 @@ nav a.active {
         display: flex;
         align-items: center;
         font-size: 30px;
+        padding-top: 20%;
     }
 
     .services-list {
         padding: 0;
         align-items: center;
+        justify-content: center;
+        margin: 10px;
     }
 
     .Skills .words {
@@ -758,8 +763,8 @@ nav a.active {
         justify-content: center;
         align-items: center;
         padding: 10px; /* Smaller padding if needed */
-        padding-left: 20%;
-        padding-right: 20%;
+        padding-left: 25%;
+        padding-right: 25%;
     }
 
     .soft-skill {
@@ -802,5 +807,88 @@ nav a.active {
     .glass {
         width: 400px;
         height: 500px;
+    }
+}
+
+/* Media Queries for Mobile Devices */
+
+/* Adjustments for devices up to 480px wide */
+@media (max-width: 480px) {
+    .header {
+        padding-left: 10px; /* Reduce padding for smaller screens */
+        display: block; /* Stack elements vertically */
+    }
+
+    nav a {
+        font-size: 18px; /* Reduce font size for smaller screens */
+        margin-left: 15px; /* Adjust spacing between nav items */
+    }
+
+    .home-content, .about, .services-list, .contact, .footer {
+        padding: 20px; /* Adjust padding for content areas */
+        padding-top: 100px;
+    }
+
+    .home-content h3, .about-text h2, .about-text h4 {
+        font-size: 26px; /* Reduce font size for headings */
+    }
+
+    .home-content h4, .sub-title, .contact-page h3 {
+        font-size: 22px; /* Slightly reduce font size for subheadings */
+    }
+
+    .home-sci a, .contact .home-sci a {
+        width: 30px;
+        height: 30px; /* Adjust social icon sizes */
+    }
+
+    .glass {
+        width: 100%; /* Make glass effect container full width */
+        max-width: 400px; /* Limit max width for larger screens */
+        height: auto; /* Adjust height based on content */
+    }
+
+    .progress-bar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        grid-gap: 10px; /* Smaller gap between items */
+        justify-content: center;
+        align-items: center;
+        padding: 10px; /* Smaller padding if needed */
+        padding-left: 30%;
+        padding-right: 30%;
+    }
+}
+
+/* Adjustments for very small devices (up to 320px wide) */
+@media (max-width: 320px) {
+    .header, nav a {
+        font-size: 16px; /* Further reduce font sizes for very small screens */
+    }
+
+    .home-content, .about, .services-list, .Skills, .projects, .contact, .footer {
+        padding: 15px; /* Reduce padding for content areas */
+        padding-top: 25%;
+    }
+
+    .home-content h3 {
+        font-size: 24px; /* Adjust home content headings for very small screens */
+    }
+
+    .home-content h4, .about-text h4 {
+        font-size: 20px; /* Adjust font sizes for smaller text elements */
+    }
+
+    .sub-title, .contact-page h3 {
+        font-size: 20px; /* Reduce font size for titles and headings */
+    }
+
+    .services-list, .skills-container, .projects .services-list {
+        grid-template-columns: 1fr; /* Adjust layout for service lists and skills containers */
+    }
+
+    .glass {
+        padding: 15px; /* Adjust padding inside glass effect containers */
+        border-radius: 25px; /* Soften border radius for aesthetic adaptation */
     }
 }
