@@ -6,7 +6,6 @@
     <title>Adnan Ibrahim</title>
     <link rel="stylesheet" href="stylesheet.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 </head>
@@ -28,9 +27,10 @@
     <!-- Home Content -->
     <section class = "home" id = "home" >
         <div class = "home-content">
-            <h3><span>Hello</span> World!</h3>
-            <h4>I am Adnan, <span class = "text"></span></h4>
-            <p><br> <em>Busy <span>Engineering</span> Dreams</em></p>
+            <p class = "eyebrow"><span>Hello</span> World!</p>
+            <h1>I'm Adnan, <span class = "text">a Software Developer at IBM</span>.</h1>
+            <p class = "tagline"><em><span>Kubernetes</span>, <span>Helm</span> and <span>Ansible</span>: turning complex,
+                multi-site deployments into repeatable automation.</em></p>
             <div class = "home-sci">
                 <a href = 'https://www.linkedin.com/in/adnan-i-784225262/' target='_blank'  style="--i:7"><i class='bx bxl-linkedin'></i></a>
                 <a href = 'https://github.com/adnanibrahim29' target='_blank' style="--i:8"><i class='bx bxl-github'></i></a>
@@ -44,31 +44,18 @@
 
     <section class="about" id = "about">
         <div class = "about-img">
-            <img src = "images/me.png" data-aos="fade-right">
+            <img src = "images/me.png" alt = "Portrait of Adnan Ibrahim" width = "500" height = "500" data-aos="fade-right">
         </div>
-        <div class = "about-text"> 
+        <div class = "about-text">
             <h2 data-aos="fade-down">About <span>Me</span></h2>
-            <h4 data-aos="fade-up">Student Software Engineer</h4>
-            <p data-aos="fade-left">Currently, I am a student at Maynooth University, 
-                where I'm pursuing a degree in Computer Science & Software Engineering. Driven by cutting-edge technology, 
-                I have experience with multiple programming languages, including Java, SQL, Python, HTML, and CSS, and I am focused on crafting innovative,
-                user-friendly software.
-                <br><br>
-                <span id="more" style="display: none;">
-                    I am committed to continuously expanding my knowledge base not only by advancing my expertise in these 
-                    languages but also by exploring new programming languages and technologies. <br><br>
-                    In my pursuit of technology, I find it crucial to balance my mental and physical well-being.
-                    To achieve this, I often take a step back from the digital world to engage in playing badminton. <br><br> This activity not only keeps me 
-                    physically active but also serves as a refreshing break that rejuvenates my mind. Representing Wexford, Gorey, and Maynooth University in badminton competitions,
-                    I cherish these moments for the clarity and perspective they bring to my professional and personal life.
-                    <br><br>
-                    I am eager to use the skills I have developed to contribute to society and am committed to delivering impactful solutions through creative problem-solving, 
-                    always striving for excellence in every endeavor.
-                </span>
+            <p class = "about-role" data-aos="fade-up">Software Developer at IBM, Dublin</p>
+            <p data-aos="fade-left">I'm a Software Developer at IBM in Dublin, where I build and automate
+                deployments of AI infrastructure across multiple sites.
+                Day to day I work with Kubernetes (k3s), Helm, Ansible and Linux, using CI/CD pipelines
+                to make every rollout repeatable.
+                I graduated from Maynooth University with a BSc in Computer Science &amp; Software Engineering.
+                Away from the keyboard I play badminton, and have represented Wexford, Gorey and Maynooth University.
             </p>
-
-            <a href = "javascript:void(0);" class = "btn-box" onclick="toggleReadMore()"> Read More!</a>
-            
         </div>
     </section>
 

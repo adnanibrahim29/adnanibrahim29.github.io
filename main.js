@@ -1,11 +1,3 @@
-var typed = new Typed(".text", {
-    strings: ["Engineer", "Innovator", "Entrepreneur", "Developer", "Designer"],
-    typeSpeed: 100,
-    backspeed: 100,
-    backDelay: 1000,
-    loop:true
-})
-
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
 
@@ -26,16 +18,3 @@ window.onscroll = () => {
 };
 
 document.getElementById('year').textContent = new Date().getFullYear();
-
-function toggleReadMore() {
-    var moreText = document.getElementById("more");
-    var btnText = document.querySelector(".btn-box");
-  
-    if (moreText.style.display === "none") {
-      moreText.style.display = "inline";
-      btnText.textContent = "Read Less";
-    } else {
-      moreText.style.display = "none";
-      btnText.textContent = "Read More";
-    }
-  }
