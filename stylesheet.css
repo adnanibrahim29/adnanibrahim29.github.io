@@ -93,7 +93,7 @@ nav a.active {
     color: gold;
 }
 
-.home-content h3 {
+.home-content .eyebrow {
     font-size: 40px;
     font-weight: 700;
     opacity: 0;
@@ -101,7 +101,7 @@ nav a.active {
     animation-delay: .7s;
 }
 
-.home-content h4 {
+.home-content h1 {
     font-size: 25px;
     font-weight: 700;
     opacity: 0;
@@ -109,27 +109,10 @@ nav a.active {
     animation-delay: .7s;
 }
 
-.home-content h3:nth-of-type(2){
-    margin-bottom: 30px;
-    animation: slideTop 1s ease forwards;
-    animation-delay: .7s;
-}
-
-.home-content h3 span {
-    color: gold;
-}
-
-.home-content h1 {
-    font-size: 56px;
-    font-weight: 700;
-    margin: -3px 0;
-    opacity: 0;
-    animation: slightRight 1s ease forwards;
-    animation-delay: 1s;
-}
-
-.home-content p {
+.home-content .tagline {
     font-size: 20px;
+    line-height: 1.5;
+    margin-top: 20px;
     opacity: 0;
     animation: slideLeft 1s ease forwards;
     animation-delay: 1s;
@@ -218,7 +201,7 @@ nav a.active {
 
 }
 
-.about-text h4 {
+.about-text .about-role {
     font-size: 25px;
     font-weight: 600;
     color: wheat;
@@ -689,13 +672,13 @@ nav a.active {
         padding-top: 150px;
     }
 
-    .home-content h3 {
+    .home-content .eyebrow {
         padding-top: 20px;
         font-size: 30px;
         text-align: center;
     }
 
-    .home-content h4 {
+    .home-content h1 {
         font-size: 25px;
         text-align: center;
     }
@@ -728,7 +711,7 @@ nav a.active {
         font-size: 50px;
     }
     
-    .about-text h4 {
+    .about-text .about-role {
         font-size: 20px;
     }
 
@@ -829,11 +812,11 @@ nav a.active {
         padding-top: 100px;
     }
 
-    .home-content h3, .about-text h2, .about-text h4 {
+    .home-content .eyebrow, .about-text h2, .about-text .about-role {
         font-size: 26px; /* Reduce font size for headings */
     }
 
-    .home-content h4, .sub-title, .contact-page h3 {
+    .home-content h1, .sub-title, .contact-page h3 {
         font-size: 22px; /* Slightly reduce font size for subheadings */
     }
 
@@ -871,11 +854,11 @@ nav a.active {
         padding-top: 25%;
     }
 
-    .home-content h3 {
+    .home-content .eyebrow {
         font-size: 24px; /* Adjust home content headings for very small screens */
     }
 
-    .home-content h4, .about-text h4 {
+    .home-content h1, .about-text .about-role {
         font-size: 20px; /* Adjust font sizes for smaller text elements */
     }
 
