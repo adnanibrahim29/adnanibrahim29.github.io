@@ -1,5 +1,6 @@
 // Hero background: a slowly rotating network of glowing nodes, like a distributed cluster.
 // Purely decorative. If WebGL or the three.js CDN is unavailable, the hero keeps its CSS background.
+import { mountScene, createGlowTexture, reducedMotion } from './three-stage.js';
 
 // Settings
 const NODE_COUNT_DESKTOP = 80;
@@ -14,44 +15,14 @@ const FIELD_RADIUS = 5;                   // nodes are scattered inside a sphere
 const ROTATION_SPEED = 0.05;              // radians per second
 const PARALLAX_STRENGTH = 0.8;            // how far the camera drifts toward the mouse
 const PARALLAX_EASING = 2;                // higher = camera follows the mouse faster
-const MAX_PIXEL_RATIO = 2;
 
-const hero = document.querySelector('.home');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function webglAvailable() {
-    try {
-        const canvas = document.createElement('canvas');
-        return !!(canvas.getContext('webgl2') || canvas.getContext('webgl'));
-    } catch {
-        return false;
-    }
-}
-
-if (hero && webglAvailable()) {
-    // A failed CDN load or renderer error just leaves the CSS background in place
-    init().catch(() => {});
-}
-
-async function init() {
-    const THREE = await import('three');
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
-    renderer.domElement.className = 'hero-canvas';
-    renderer.domElement.setAttribute('aria-hidden', 'true');
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
-    camera.position.z = 10;
-
+mountScene(document.querySelector('.home'), ({ THREE, scene, camera }) => {
     const network = new THREE.Group();
     scene.add(network);
 
-    const glowTexture = createGlowTexture(THREE);
     const pointsMaterial = new THREE.PointsMaterial({
         size: NODE_SIZE,
-        map: glowTexture,
+        map: createGlowTexture(THREE),
         vertexColors: true,
         transparent: true,
         depthWrite: false
@@ -142,113 +113,27 @@ async function init() {
         );
     }
 
-    function render() {
-        renderer.render(scene, camera);
-    }
-
-    let lastTime = null;
-
-    function tick(time) {
-        const delta = lastTime === null ? 0 : Math.min((time - lastTime) / 1000, 0.1);
-        lastTime = time;
-
-        network.rotation.y += ROTATION_SPEED * delta;
-        network.rotation.x += ROTATION_SPEED * 0.3 * delta;
-
-        const ease = 1 - Math.exp(-PARALLAX_EASING * delta);
-        camera.position.x += (parallaxTarget.x * PARALLAX_STRENGTH - camera.position.x) * ease;
-        camera.position.y += (parallaxTarget.y * PARALLAX_STRENGTH - camera.position.y) * ease;
-        camera.lookAt(scene.position);
-
-        render();
-    }
-
-    // Only animate while the hero is on screen and the tab is visible
-    let heroVisible = true;
-    let running = false;
-
-    function updateLoop() {
-        const shouldRun = !reducedMotion && heroVisible && !document.hidden;
-        if (shouldRun === running) return;
-        running = shouldRun;
-        lastTime = null;
-        renderer.setAnimationLoop(running ? tick : null);
-    }
-
-    function resize() {
-        const { clientWidth: width, clientHeight: height } = hero;
-        if (!width || !height) return;
-        if (targetNodeCount() !== nodeCount) buildNetwork(targetNodeCount());
-        renderer.setSize(width, height, false);
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-        if (!running) render();
-    }
-
-    const resizeObserver = new ResizeObserver(resize);
-    const intersectionObserver = new IntersectionObserver(([entry]) => {
-        heroVisible = entry.isIntersecting;
-        updateLoop();
-    });
-
-    function onPageHide(event) {
-        if (!event.persisted) dispose();
-    }
-
-    function onContextLost(event) {
-        event.preventDefault();
-        dispose();
-    }
-
-    function dispose() {
-        renderer.setAnimationLoop(null);
-        running = false;
-        resizeObserver.disconnect();
-        intersectionObserver.disconnect();
-        document.removeEventListener('visibilitychange', updateLoop);
-        window.removeEventListener('pointermove', onPointerMove);
-        window.removeEventListener('pagehide', onPageHide);
-        renderer.domElement.removeEventListener('webglcontextlost', onContextLost);
-        disposeNetwork();
-        pointsMaterial.dispose();
-        linesMaterial.dispose();
-        glowTexture.dispose();
-        renderer.dispose();
-        renderer.domElement.remove();
-    }
-
-    hero.prepend(renderer.domElement);
-    buildNetwork(targetNodeCount());
-    resize();
-
-    resizeObserver.observe(hero);
-    intersectionObserver.observe(hero);
-    document.addEventListener('visibilitychange', updateLoop);
-    window.addEventListener('pagehide', onPageHide);
-    renderer.domElement.addEventListener('webglcontextlost', onContextLost);
     if (!reducedMotion) {
         window.addEventListener('pointermove', onPointerMove, { passive: true });
     }
 
-    // With reduced motion, the single frame drawn by resize() is all that is shown
-    updateLoop();
-    requestAnimationFrame(() => renderer.domElement.classList.add('is-ready'));
-}
+    buildNetwork(targetNodeCount());
 
-// Soft round sprite so each node looks like a small glowing dot
-function createGlowTexture(THREE) {
-    const size = 64;
-    const canvas = document.createElement('canvas');
-    canvas.width = canvas.height = size;
-    const context = canvas.getContext('2d');
-    const gradient = context.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    gradient.addColorStop(0.25, 'rgba(255, 255, 255, 0.8)');
-    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, size, size);
+    return {
+        update(delta) {
+            network.rotation.y += ROTATION_SPEED * delta;
+            network.rotation.x += ROTATION_SPEED * 0.3 * delta;
 
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    return texture;
-}
+            const ease = 1 - Math.exp(-PARALLAX_EASING * delta);
+            camera.position.x += (parallaxTarget.x * PARALLAX_STRENGTH - camera.position.x) * ease;
+            camera.position.y += (parallaxTarget.y * PARALLAX_STRENGTH - camera.position.y) * ease;
+            camera.lookAt(scene.position);
+        },
+        resize() {
+            if (targetNodeCount() !== nodeCount) buildNetwork(targetNodeCount());
+        },
+        dispose() {
+            window.removeEventListener('pointermove', onPointerMove);
+        }
+    };
+}, { className: 'hero-canvas' });

@@ -119,8 +119,8 @@ nav a.active {
     padding: 70px 10% 0;
 }
 
-/* Three.js network (js/hero-scene.js) sits between the background image and the text */
-.hero-canvas {
+/* Three.js backgrounds (js/*-scene.js) sit between the section background and its content */
+.scene-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -131,7 +131,7 @@ nav a.active {
     transition: opacity 1.5s ease;
 }
 
-.hero-canvas.is-ready {
+.scene-canvas.is-ready {
     opacity: 1;
 }
 
@@ -309,6 +309,7 @@ nav a.active {
 }
 
 .services-list > * {
+    position: relative;
     background: #131c2f;
     background-position: 50%;
     color:gold;
@@ -616,6 +617,9 @@ nav a.active {
 }
 
 .contact {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh; /* room for the whole globe (js/globe-scene.js) around the panel */
     padding-top: 100px;
     display: flex;
     justify-content: center;
@@ -624,6 +628,17 @@ nav a.active {
     padding: 70px 10%;
     text-align: center;
     color: white;
+}
+
+.contact-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fade the globe out at the section edges instead of cutting it off */
+.contact-canvas {
+    -webkit-mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
 }
 
 .contact-page .greeting{
@@ -683,6 +698,9 @@ nav a.active {
 .glass {
     width: min(800px, 100%);
     background: rgba(255, 255, 255, 0.1);
+    /* Frost the globe behind the panel so it never competes with the text */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 25px 45px rgba(0,0,0, .2);
     border-radius: 50px;
     border: 2px solid red;
@@ -920,6 +938,7 @@ nav a.active {
     }
 
     .contact {
+        min-height: auto;
         padding: 40px 16px;
     }
 
