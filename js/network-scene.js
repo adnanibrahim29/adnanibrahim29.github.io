@@ -1,5 +1,5 @@
-// Hero background: a slowly rotating network of glowing nodes, like a distributed cluster.
-// Purely decorative. If WebGL or the three.js CDN is unavailable, the hero keeps its CSS background.
+// Contact background: a slowly rotating network of glowing nodes, like a distributed cluster.
+// Purely decorative. If WebGL or the three.js CDN is unavailable, the section keeps its CSS background.
 import { mountScene, createGlowTexture, reducedMotion } from './three-stage.js';
 
 // Settings
@@ -15,10 +15,15 @@ const FIELD_RADIUS = 5;                   // nodes are scattered inside a sphere
 const ROTATION_SPEED = 0.05;              // radians per second
 const PARALLAX_STRENGTH = 0.8;            // how far the camera drifts toward the mouse
 const PARALLAX_EASING = 2;                // higher = camera follows the mouse faster
+const WIDTH_SPREAD = 0.9;                 // on wide sections, stretch the network sideways to this share of the width
 
-mountScene(document.querySelector('.home'), ({ THREE, scene, camera }) => {
+mountScene(document.querySelector('.contact'), ({ THREE, scene, camera }) => {
+    // The outer group stretches the network to the section's shape; the inner one rotates
+    const spread = new THREE.Group();
+    scene.add(spread);
+
     const network = new THREE.Group();
-    scene.add(network);
+    spread.add(network);
 
     const pointsMaterial = new THREE.PointsMaterial({
         size: NODE_SIZE,
@@ -131,9 +136,13 @@ mountScene(document.querySelector('.home'), ({ THREE, scene, camera }) => {
         },
         resize() {
             if (targetNodeCount() !== nodeCount) buildNetwork(targetNodeCount());
+
+            const halfFov = THREE.MathUtils.degToRad(camera.fov / 2);
+            const visibleWidth = 2 * camera.position.z * Math.tan(halfFov) * camera.aspect;
+            spread.scale.x = Math.max(1, WIDTH_SPREAD * visibleWidth / (2 * FIELD_RADIUS));
         },
         dispose() {
             window.removeEventListener('pointermove', onPointerMove);
         }
     };
-}, { className: 'hero-canvas' });
+}, { className: 'contact-canvas' });

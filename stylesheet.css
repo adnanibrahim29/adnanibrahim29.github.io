@@ -135,7 +135,7 @@ nav a.active {
     opacity: 1;
 }
 
-/* Darken the text side so the network never competes with the copy */
+/* Darken the text side so the globe never competes with the copy */
 .home::before {
     content: "";
     position: absolute;
@@ -619,7 +619,6 @@ nav a.active {
 .contact {
     position: relative;
     overflow: hidden;
-    min-height: 100vh; /* room for the whole globe (js/globe-scene.js) around the panel */
     padding-top: 100px;
     display: flex;
     justify-content: center;
@@ -635,7 +634,7 @@ nav a.active {
     z-index: 1;
 }
 
-/* Fade the globe out at the section edges instead of cutting it off */
+/* Fade the network out at the section edges instead of cutting it off */
 .contact-canvas {
     -webkit-mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
     mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
@@ -698,7 +697,7 @@ nav a.active {
 .glass {
     width: min(800px, 100%);
     background: rgba(255, 255, 255, 0.1);
-    /* Frost the globe behind the panel so it never competes with the text */
+    /* Frost the network behind the panel so it never competes with the text */
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     box-shadow: 0 25px 45px rgba(0,0,0, .2);
@@ -938,7 +937,6 @@ nav a.active {
     }
 
     .contact {
-        min-height: auto;
         padding: 40px 16px;
     }
 
