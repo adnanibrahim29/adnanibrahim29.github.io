@@ -33,11 +33,42 @@ html {
     top: 16px;
 }
 
-/* 3D tilt: js/tilt.js sets the angles from the pointer position */
+/* 3D tilt: js/tilt.js sets the angles from the pointer, finger, scroll position or phone tilt */
 [data-tilt] {
-    transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transform: perspective(900px) translateY(var(--lift, 0px))
+        rotateX(calc(var(--tilt-x, 0deg) + var(--scroll-tilt, 0deg))) rotateY(var(--tilt-y, 0deg));
     transform-style: preserve-3d;
     transition: transform .3s ease-out;
+}
+
+/* Let a finger drag sideways across a card to tilt it, while vertical scrolling and zoom still work */
+@media (hover: none) {
+    [data-tilt] {
+        touch-action: pan-y pinch-zoom;
+    }
+}
+
+/* "Enable motion" button for phone tilt (shown by js/tilt.js when supported) */
+.motion-toggle {
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    z-index: 150;
+    padding: 10px 16px;
+    font: inherit;
+    font-size: 14px;
+    color: white;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid gold;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.motion-toggle[aria-pressed="true"] {
+    color: #131c2f;
+    background: gold;
 }
 /* Frosted-glass panels that keep text readable over the 3D scene */
 :root {
@@ -453,7 +484,8 @@ nav a.active {
     transition: opacity .3s;
 }
 
-.services-list > [data-tilt]:hover::after {
+.services-list > [data-tilt]:hover::after,
+.services-list > [data-tilt].is-tilting::after {
     opacity: 1;
 }
 
