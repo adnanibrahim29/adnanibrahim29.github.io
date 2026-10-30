@@ -136,15 +136,6 @@ nav a.active {
     animation-delay: .7s;
 }
 
-.home-content .tagline {
-    font-size: 20px;
-    line-height: 1.5;
-    margin-top: 20px;
-    opacity: 0;
-    animation: slideLeft 1s ease forwards;
-    animation-delay: 1s;
-}
-
 .home-content .text{
     color: gold;
 }
@@ -764,10 +755,6 @@ nav a.active {
 
     .home-content h1 {
         font-size: 22px;
-    }
-
-    .home-content .tagline {
-        font-size: 17px;
     }
 
     .home-sci {
