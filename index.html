@@ -29,7 +29,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
-    <!-- three.js for the hero background (js/hero-scene.js). Bump the version number here to upgrade. -->
+    <!-- three.js for the hero and contact backgrounds (js/*-scene.js). Bump the version number here to upgrade. -->
     <script type="importmap">
         {
             "imports": {
@@ -37,7 +37,8 @@
             }
         }
     </script>
-    <script type="module" src="js/hero-scene.js"></script>
+    <script type="module" src="js/network-scene.js"></script>
+    <script type="module" src="js/globe-scene.js"></script>
 
 </head>
 <body>
@@ -75,7 +76,7 @@
     </section>
 
     <section class="about" id = "about">
-        <div class = "about-img">
+        <div class = "about-img" data-tilt="6">
             <img src = "images/me.png" alt = "Portrait of Adnan Ibrahim" width = "500" height = "500" data-aos="fade-right">
         </div>
         <div class = "about-text">
@@ -98,7 +99,7 @@
                 <h2 class="sub-title" data-aos="fade-down">Work <span>Experience</span></h2>
                 <div class="services-list single" data-aos="fade-up">
 
-                    <article>
+                    <article data-tilt>
                         <i class='bx bx-server' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>Software Developer</span></h3>
                         <p class="meta">IBM &middot; Dublin, Ireland &middot; Since <span class="todo">TODO: Month Year</span></p>
@@ -124,7 +125,7 @@
                 <h2 class="sub-title" data-aos="fade-down">My <span>Education</span></h2>
                 <div class="services-list single" data-aos="fade-up">
 
-                    <article>
+                    <article data-tilt>
                         <i class='bx bxs-graduation' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>BSc Computer Science &amp; Software Engineering</span></h3>
                         <p class="meta">Maynooth University &middot; Graduated <span class="todo">TODO: year</span>
@@ -145,7 +146,7 @@
         <div class="skill-group" data-aos="fade-right">
             <h3>Languages</h3>
             <ul class="progress-bar">
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#8BFFAA;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -157,7 +158,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#EF8C9A;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -169,7 +170,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#AFCBBA;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -181,7 +182,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#8CD8DD;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -193,7 +194,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#DE9ACD;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -211,7 +212,7 @@
         <div class="skill-group" data-aos="fade-left">
             <h3>Infrastructure &amp; DevOps</h3>
             <ul class="progress-bar">
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#BBCDEF;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -223,7 +224,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#FBDABB;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -235,7 +236,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#F898ED;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -247,7 +248,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#CDDE9E;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -265,7 +266,7 @@
         <div class="skill-group" data-aos="fade-right">
             <h3>Tools &amp; Practices</h3>
             <ul class="progress-bar">
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#DD6622;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -277,7 +278,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="card">
+                <li class="card" data-tilt="15">
                     <div class="percent" style="--clr:#04fc43;--num:100;">
                         <div class="dot"></div>
                         <svg aria-hidden="true">
@@ -301,7 +302,7 @@
                 <!-- TODO: second placeholder card. Public repos you could feature: CloudGuardian, CovidDetector -->
                 <div class="services-list" data-aos="fade-up">
 
-                    <article>
+                    <article data-tilt>
                         <i class='bx bx-food-menu' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>EPOS Restaurant Ordering App</span></h3>
                         <dl class="project-details">
@@ -315,7 +316,7 @@
                         <span class="todo">TODO: GitHub link</span>
                     </article>
 
-                    <article>
+                    <article data-tilt>
                         <i class='bx bx-code-alt' style='color: aqua' aria-hidden="true"></i>
                         <h3><span><span class="todo">TODO: project name</span></span></h3>
                         <dl class="project-details">
@@ -329,7 +330,7 @@
                         <span class="todo">TODO: GitHub link</span>
                     </article>
 
-                    <article>
+                    <article data-tilt>
                         <i class='bx bx-cloud' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>Portfolio Website</span></h3>
                         <dl class="project-details">
@@ -348,7 +349,7 @@
                         <a class="read" href="https://github.com/adnanibrahim29/adnanibrahim29.github.io" target="_blank" rel="noopener">View on GitHub</a>
                     </article>
 
-                    <article>
+                    <article data-tilt>
                         <i class='bx bx-game' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>Blackjack</span></h3>
                         <dl class="project-details">
@@ -365,7 +366,7 @@
                         <a class="read" href="https://github.com/adnanibrahim29/Blackjack" target="_blank" rel="noopener">View on GitHub</a>
                     </article>
 
-                    <article>
+                    <article data-tilt>
                         <i class='bx bx-money-withdraw' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>ATM</span></h3>
                         <dl class="project-details">
@@ -411,6 +412,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="main.js"></script>
+    <script src="js/tilt.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
       AOS.init({
