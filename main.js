@@ -25,15 +25,4 @@ window.onscroll = () => {
     });
 };
 
-function toggleReadMore() {
-    var moreText = document.getElementById("more");
-    var btnText = document.querySelector(".btn-box");
-  
-    if (moreText.style.display === "none") {
-      moreText.style.display = "inline";
-      btnText.textContent = "Read Less";
-    } else {
-      moreText.style.display = "none";
-      btnText.textContent = "Read More";
-    }
-  }
+document.getElementById('year').textContent = new Date().getFullYear();
