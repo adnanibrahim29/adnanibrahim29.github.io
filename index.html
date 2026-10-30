@@ -31,10 +31,11 @@
 
 </head>
 <body>
+    <a class = "skip-link" href = "#main">Skip to content</a>
     <header class = "header">
-        <a href = '#' class = "logo">Adnan <span>Ibrahim</span></a>
-    
-        <nav>
+        <a href = '#home' class = "logo">Adnan <span>Ibrahim</span></a>
+
+        <nav aria-label = "Main">
             <a href = '#home' style="--i:1" class="active">Home</a>
             <a href = '#about' style="--i:2">About</a>
             <a href = '#experience' style="--i:3">Experience</a>
@@ -46,6 +47,7 @@
     </header>
 
 
+    <main id = "main">
     <!-- Home Content -->
     <section class = "home" id = "home" >
         <div class = "home-content">
@@ -393,7 +395,7 @@
             </div>
         </div>
     </section>
-
+    </main>
 
     <footer class = "footer" data-aos="fade-up">
         <p>Created <span>By</span> Adnan <span>Ibrahim</span></p>
@@ -404,7 +406,8 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
       AOS.init({
-        duration: 2000
+        duration: 2000,
+        disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
       });
     </script>
 </body>
