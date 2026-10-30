@@ -235,7 +235,7 @@ nav a.active {
 }
 
 /* University Modules */
-#services {
+.services {
     color: white;
     font-size: 35px;
     line-height: 1.4;
@@ -649,7 +649,7 @@ nav a.active {
         opacity: 0;
     }
     100% {
-        tranform : translateY(0);
+        transform : translateY(0);
         opacity: 1;
     }
 }
@@ -659,7 +659,7 @@ nav a.active {
         opacity: 0;
     }
     100% {
-        tranform : translateY(0);
+        transform : translateY(0);
         opacity: 1;
     }
 }
