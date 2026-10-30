@@ -1,1 +1,41 @@
+# macOS
 .DS_Store
+._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Node (if tooling such as a formatter or linter is added later)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Jekyll (GitHub Pages builds it on the server; these are local build outputs)
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Environment and secrets
+.env
+.env.*
+
+# Logs and temp files
+*.log
+*.tmp
