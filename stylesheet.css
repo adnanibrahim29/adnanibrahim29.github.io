@@ -32,6 +32,13 @@ html {
 .skip-link:focus {
     top: 16px;
 }
+
+/* 3D tilt: js/tilt.js sets the angles from the pointer position */
+[data-tilt] {
+    transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transform-style: preserve-3d;
+    transition: transform .3s ease-out;
+}
 body {
     margin: auto;
     color: #f2f2f2;
@@ -308,7 +315,7 @@ nav a.active {
     padding: 25px;
     font-size: 15px;
     border-radius: 20px;
-    transition: background 0.5s, transform 0.5s;
+    transition: background 0.5s, transform .3s ease-out;
     box-shadow: 1px 1px 20px wheat,
                 1px 1px 40px gold
 
@@ -408,7 +415,31 @@ nav a.active {
 }
 
 .services-list > *:hover {
-    transform: translateY(-40px);
+    --lift: -40px;
+}
+
+/* Raise the icon and title off the tilted card, and add a glare that follows the pointer */
+.services-list > [data-tilt] > i {
+    transform: translateZ(40px);
+}
+
+.services-list > [data-tilt] > h3 {
+    transform: translateZ(25px);
+}
+
+.services-list > [data-tilt]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255, 255, 255, .15), transparent 60%);
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.services-list > [data-tilt]:hover::after {
+    opacity: 1;
 }
 
 /* Skills */
@@ -861,7 +892,7 @@ nav a.active {
 
     /* No lift-on-hover on touch screens */
     .services-list > *:hover {
-        transform: none;
+        --lift: 0px;
     }
 
     .Skills {
