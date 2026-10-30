@@ -32,6 +32,13 @@ html {
 .skip-link:focus {
     top: 16px;
 }
+
+/* 3D tilt: js/tilt.js sets the angles from the pointer position */
+[data-tilt] {
+    transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transform-style: preserve-3d;
+    transition: transform .3s ease-out;
+}
 body {
     margin: auto;
     color: #f2f2f2;
@@ -112,8 +119,8 @@ nav a.active {
     padding: 70px 10% 0;
 }
 
-/* Three.js network (js/hero-scene.js) sits between the background image and the text */
-.hero-canvas {
+/* Three.js backgrounds (js/*-scene.js) sit between the section background and its content */
+.scene-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -124,11 +131,11 @@ nav a.active {
     transition: opacity 1.5s ease;
 }
 
-.hero-canvas.is-ready {
+.scene-canvas.is-ready {
     opacity: 1;
 }
 
-/* Darken the text side so the network never competes with the copy */
+/* Darken the text side so the globe never competes with the copy */
 .home::before {
     content: "";
     position: absolute;
@@ -302,13 +309,14 @@ nav a.active {
 }
 
 .services-list > * {
+    position: relative;
     background: #131c2f;
     background-position: 50%;
     color:gold;
     padding: 25px;
     font-size: 15px;
     border-radius: 20px;
-    transition: background 0.5s, transform 0.5s;
+    transition: background 0.5s, transform .3s ease-out;
     box-shadow: 1px 1px 20px wheat,
                 1px 1px 40px gold
 
@@ -408,7 +416,31 @@ nav a.active {
 }
 
 .services-list > *:hover {
-    transform: translateY(-40px);
+    --lift: -40px;
+}
+
+/* Raise the icon and title off the tilted card, and add a glare that follows the pointer */
+.services-list > [data-tilt] > i {
+    transform: translateZ(40px);
+}
+
+.services-list > [data-tilt] > h3 {
+    transform: translateZ(25px);
+}
+
+.services-list > [data-tilt]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255, 255, 255, .15), transparent 60%);
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.services-list > [data-tilt]:hover::after {
+    opacity: 1;
 }
 
 /* Skills */
@@ -585,6 +617,8 @@ nav a.active {
 }
 
 .contact {
+    position: relative;
+    overflow: hidden;
     padding-top: 100px;
     display: flex;
     justify-content: center;
@@ -593,6 +627,17 @@ nav a.active {
     padding: 70px 10%;
     text-align: center;
     color: white;
+}
+
+.contact-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fade the network out at the section edges instead of cutting it off */
+.contact-canvas {
+    -webkit-mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
 }
 
 .contact-page .greeting{
@@ -652,6 +697,9 @@ nav a.active {
 .glass {
     width: min(800px, 100%);
     background: rgba(255, 255, 255, 0.1);
+    /* Frost the network behind the panel so it never competes with the text */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 25px 45px rgba(0,0,0, .2);
     border-radius: 50px;
     border: 2px solid red;
@@ -861,7 +909,7 @@ nav a.active {
 
     /* No lift-on-hover on touch screens */
     .services-list > *:hover {
-        transform: none;
+        --lift: 0px;
     }
 
     .Skills {
