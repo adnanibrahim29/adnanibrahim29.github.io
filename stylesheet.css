@@ -3,8 +3,34 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
     font-family: 'poppins', monospace;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* keep section titles clear of the fixed header */
+}
+
+/* Accessibility */
+:focus-visible {
+    outline: 3px solid gold;
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 200;
+    padding: 10px 16px;
+    background: gold;
+    color: #131c2f;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.skip-link:focus {
+    top: 16px;
 }
 body {
     margin: auto;
@@ -67,6 +93,7 @@ nav a {
 }
 
 nav a:hover,
+nav a:focus-visible,
 nav a.active {
     color: gold;
 }
@@ -93,7 +120,7 @@ nav a.active {
     color: gold;
 }
 
-.home-content h3 {
+.home-content .eyebrow {
     font-size: 40px;
     font-weight: 700;
     opacity: 0;
@@ -101,38 +128,12 @@ nav a.active {
     animation-delay: .7s;
 }
 
-.home-content h4 {
+.home-content h1 {
     font-size: 25px;
     font-weight: 700;
     opacity: 0;
     animation: slideBottom 1s ease forwards;
     animation-delay: .7s;
-}
-
-.home-content h3:nth-of-type(2){
-    margin-bottom: 30px;
-    animation: slideTop 1s ease forwards;
-    animation-delay: .7s;
-}
-
-.home-content h3 span {
-    color: gold;
-}
-
-.home-content h1 {
-    font-size: 56px;
-    font-weight: 700;
-    margin: -3px 0;
-    opacity: 0;
-    animation: slightRight 1s ease forwards;
-    animation-delay: 1s;
-}
-
-.home-content p {
-    font-size: 20px;
-    opacity: 0;
-    animation: slideLeft 1s ease forwards;
-    animation-delay: 1s;
 }
 
 .home-content .text{
@@ -159,7 +160,8 @@ nav a.active {
     
 }
 
-.home-sci a:hover {
+.home-sci a:hover,
+.home-sci a:focus-visible {
     background: white;
     color: #111;
     box-shadow: 0 0 20px gold;
@@ -186,7 +188,8 @@ nav a.active {
     box-shadow: 0 0 5px gold, 0 0 25px gold;
 }
 
-.btn-box:hover {
+.btn-box:hover,
+.btn-box:focus-visible {
     box-shadow: 0 0 5px gold,
     0 0 25px gold, 0 0 50px gold, 0 0 100px gold, 0 0 200px gold;
 }
@@ -218,7 +221,7 @@ nav a.active {
 
 }
 
-.about-text h4 {
+.about-text .about-role {
     font-size: 25px;
     font-weight: 600;
     color: wheat;
@@ -234,8 +237,8 @@ nav a.active {
     padding-right: 4rem;
 }
 
-/* University Modules */
-#services {
+/* Card sections: Experience, Education, Projects */
+.services {
     color: white;
     font-size: 35px;
     line-height: 1.4;
@@ -261,7 +264,7 @@ nav a.active {
 
 .services-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(259px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(min(259px, 100%), 1fr));
     grid-gap: 40px;
     margin-top: 50px;
 }
@@ -270,38 +273,88 @@ nav a.active {
     color: white;
 }
 
-.services-list div {
+.services-list > * {
     background: #131c2f;
-    background-position: 50%; 
+    background-position: 50%;
     color:gold;
     padding: 25px;
-    font-size: 13px;
-    font-weight: 13px;
-    border-right: 10px;
+    font-size: 15px;
     border-radius: 20px;
     transition: background 0.5s, transform 0.5s;
     box-shadow: 1px 1px 20px wheat,
                 1px 1px 40px gold
-               
+
 }
 
-.services-list div i {
+.services-list > * > i {
     font-size: 50px;
     margin-bottom: 10px;
 }
 
-.services-list div h3 {
+.services-list h3 {
     font-size: 17px;
     font-weight: 500;
     margin-top: 10px;
 }
 
-.services-list div a {
-    text-decoration: none;
-    color: black;
+.services-list.single {
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+.services-list .meta {
+    color: wheat;
+    margin: 6px 0 16px;
+}
+
+.services-list .bullets {
+    text-align: left;
+    color: white;
+    line-height: 1.6;
+    padding-left: 20px;
+}
+
+.services-list .bullets li {
+    margin-bottom: 8px;
+}
+
+.services-list .bullets li::marker {
+    color: gold;
+}
+
+/* Placeholder for content still to be filled in */
+.todo,
+.services-list span.todo {
+    color: #131c2f;
+    background: #ffd54f;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.project-details {
+    text-align: left;
+    margin: 16px 0;
+}
+
+.project-details dt {
+    color: wheat;
     font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 12px;
+}
+
+.project-details dd {
+    color: white;
+    line-height: 1.5;
+}
+
+.services-list .read {
     margin-top: 20px;
-    display: inline-block;
 }
 
 .read {
@@ -320,12 +373,13 @@ nav a.active {
     box-shadow: 0 0 5px gold ,0 0 25px gold;
 }
 
-.read:hover {
+.read:hover,
+.read:focus-visible {
     box-shadow: 0 0 5px gold,
     0 0 25px gold, 0 0 50px gold, 0 0 100px gold, 0 0 200px gold;
 }
 
-.services-list div:hover {
+.services-list > *:hover {
     transform: translateY(-40px);
 }
 
@@ -360,26 +414,21 @@ nav a.active {
     color: gold;
 }
 
-.skills-container {
-    display: flex;
-    justify-content: space-around; /* This will space out the technical and soft skills evenly */
-    flex-wrap: wrap; /* Allows the sections to wrap on smaller screens */
-    gap: 20px; /* Adds space between the skill sections */
+.skill-group {
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 40px;
 }
-
-
 
 /* Progress Bar */
 .progress-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
-    justify-items: center;
-    align-items: center;
-    margin-bottom: -50px;
-    width: calc(3 * 150px + 2 * 20px + 40px); /* 3 cards + 2 gaps + padding */
-    height: calc(3 * 150px + 2 * 20px + 40px); /* Same for height */
+    list-style: none;
+    max-width: 900px;
+    margin: 30px auto 0;
 }
 
 .progress-bar .card {
@@ -470,7 +519,7 @@ nav a.active {
     align-items: center;
     flex-direction: column;
     opacity: 0;
-    animation: fadeIn 2s linear infinite;
+    animation: fadeIn 2s linear forwards;
     animation-delay: 1.5s;
 }
 
@@ -504,10 +553,7 @@ nav a.active {
 }
 
 .icons-container {
-    display: row;
-    align-content: center;
-    height: 10; /* Adjust height as needed */
-    background-color: #131c2f;
+    font-size: 30px;
 }
 
 .contact {
@@ -526,8 +572,14 @@ nav a.active {
     font-weight: 600;
     margin-bottom: 20px;
 }
-.contact-page h3 {
-    font-size: 60px;;
+.contact-page h2 {
+    font-size: 60px;
+}
+
+.contact-page .email-link {
+    color: gold;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
 }
 
 .contact-page span {
@@ -556,10 +608,10 @@ nav a.active {
     animation: slideLeft 1s ease forwards;
     animation-delay: calc(.2s * var(--i));
     margin: 30px 15px 30px 0;
-    margin-bottom: 10rem;
 }
 
-.contact a:hover {
+.contact .home-sci a:hover,
+.contact .home-sci a:focus-visible {
     background: white;
     color: #111;
     box-shadow: 0 0 20px gold;
@@ -570,17 +622,14 @@ nav a.active {
 }
 
 .glass {
-    position: center;
-    width: 800px;
-    height: 500px;
+    width: min(800px, 100%);
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 25px 45px rgba(0,0,0, .2);
     border-radius: 50px;
     border: 2px solid red;
     border-right: 2px solid gold;
     border-bottom: 2px solid gold;
-    backdrop-filter: blur(100%);
-    padding-top: 30px;
+    padding: 30px 20px;
 }
 
 .footer {
@@ -649,7 +698,7 @@ nav a.active {
         opacity: 0;
     }
     100% {
-        tranform : translateY(0);
+        transform : translateY(0);
         opacity: 1;
     }
 }
@@ -659,65 +708,83 @@ nav a.active {
         opacity: 0;
     }
     100% {
-        tranform : translateY(0);
+        transform : translateY(0);
         opacity: 1;
     }
 }
 
 
-/* Mobile View smaller screens */
+/* Tablets and phones */
 @media (max-width: 768px) {
+    html {
+        scroll-padding-top: 120px;
+    }
 
+    /* Logo on top, nav as a single swipeable row underneath */
     .header {
-        text-align: center;
-        display: inline-table;
-        line-height: 1.5rem;
-        padding-left: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 14px 16px;
+    }
+
+    .header nav {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
     }
 
     nav a {
-        font-size: 20px;
+        font-size: 17px;
+        margin: 0 20px 0 0;
+        padding: 4px 0;
     }
 
     .home {
-        flex-direction: column;
-        padding: 70px 10% 0;
+        height: auto;
+        min-height: 100vh;
+        justify-content: center;
+        padding: 140px 20px 60px;
         text-align: center;
     }
 
-    .home-content {
-        padding-top: 150px;
-    }
-
-    .home-content h3 {
-        padding-top: 20px;
+    .home-content .eyebrow {
         font-size: 30px;
-        text-align: center;
     }
 
-    .home-content h4 {
-        font-size: 25px;
-        text-align: center;
+    .home-content h1 {
+        font-size: 22px;
     }
 
     .home-sci {
-        text-align: center;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        flex-direction: row;
         display: flex;
         justify-content: center;
+        gap: 16px;
+        margin: 30px 0;
     }
 
-    .home-sci a {
-        margin: 0 10px;
-        width: 35px;
-        height: 35px;
+    /* 44px keeps icon links comfortable to tap */
+    .home-sci a,
+    .contact .home-sci a {
+        width: 44px;
+        height: 44px;
+        margin: 0;
     }
+
     .about {
         grid-template-columns: 1fr;
-        padding: 0 10%;
-        padding-bottom: 20%;
+        min-height: auto;
+        padding: 60px 20px;
+    }
+
+    .about-img {
+        text-align: center;
+    }
+
+    .about-img img {
+        max-width: 280px;
+        padding-bottom: 0;
     }
 
     .about-text {
@@ -725,170 +792,121 @@ nav a.active {
     }
 
     .about-text h2 {
-        font-size: 50px;
+        font-size: 40px;
     }
-    
-    .about-text h4 {
+
+    .about-text .about-role {
         font-size: 20px;
+        margin: 10px 0 20px;
     }
 
     .about-text p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 0;
         padding-right: 0;
     }
 
+    .container {
+        padding: 60px 16px;
+    }
+
+    .services {
+        margin-bottom: 0;
+        background-size: cover;
+    }
+
     .sub-title {
-        text-align: center;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        font-size: 30px;
-        padding-top: 20%;
+        font-size: 36px;
+        padding-bottom: 20px;
     }
 
     .services-list {
-        padding: 0;
-        align-items: center;
-        justify-content: center;
-        margin: 10px;
+        margin-top: 20px;
+        gap: 30px;
     }
 
-    .Skills .words {
-        text-align: center;
+    /* No lift-on-hover on touch screens */
+    .services-list > *:hover {
+        transform: none;
+    }
+
+    .Skills {
+        padding-top: 60px;
+    }
+
+    .Skills .Skills-subtitle {
+        font-size: 40px;
+        padding-bottom: 30px;
     }
 
     .progress-bar {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-        grid-gap: 10px; /* Smaller gap between items */
-        justify-content: center;
-        align-items: center;
-        padding: 10px; /* Smaller padding if needed */
-        padding-left: 25%;
-        padding-right: 25%;
+        gap: 12px;
     }
 
-    .soft-skill {
-        padding-top: 40%;
+    /* Shrink the rings so two fit side by side on a phone */
+    .progress-bar .card {
+        zoom: .8;
+        margin: 0;
     }
 
     .projects {
-        padding-top: 70%;
-        text-align: center;
-    }
-
-    .projects .services-list {
-        padding: 0;
-        align-items: center;
-        margin-bottom: 60px;
+        min-height: auto;
+        padding-top: 0;
     }
 
     .contact {
-        padding: 0 10%;
+        padding: 40px 16px;
     }
 
-    .contact-page h3{
-        font-size: 35px;
+    .glass {
+        padding: 30px 16px;
+        border-radius: 30px;
     }
 
-    .contact .home-sci a {
-        margin: 0 10px;
-        width: 35px;
-        height: 35px;
+    .contact-page h2 {
+        font-size: 32px;
     }
 
-    .contact .home-sci i {
-        font-size: 25px;
+    .contact-page .greeting {
+        font-size: 22px;
     }
-    
+
+    .contact-page p {
+        margin-bottom: 24px;
+    }
+
     .footer {
-        padding-top: 10%;
-    }
-
-    .glass {
-        width: 400px;
-        height: 500px;
+        padding-top: 20px;
     }
 }
 
-/* Media Queries for Mobile Devices */
-
-/* Adjustments for devices up to 480px wide */
-@media (max-width: 480px) {
-    .header {
-        padding-left: 10px; /* Reduce padding for smaller screens */
-        display: block; /* Stack elements vertically */
+/* Small phones */
+@media (max-width: 380px) {
+    .home-content .eyebrow {
+        font-size: 26px;
     }
 
-    nav a {
-        font-size: 18px; /* Reduce font size for smaller screens */
-        margin-left: 15px; /* Adjust spacing between nav items */
+    .sub-title,
+    .Skills .Skills-subtitle {
+        font-size: 30px;
     }
 
-    .home-content, .about, .services-list, .contact, .footer {
-        padding: 20px; /* Adjust padding for content areas */
-        padding-top: 100px;
-    }
-
-    .home-content h3, .about-text h2, .about-text h4 {
-        font-size: 26px; /* Reduce font size for headings */
-    }
-
-    .home-content h4, .sub-title, .contact-page h3 {
-        font-size: 22px; /* Slightly reduce font size for subheadings */
-    }
-
-    .home-sci a, .contact .home-sci a {
-        width: 30px;
-        height: 30px; /* Adjust social icon sizes */
-    }
-
-    .glass {
-        width: 100%; /* Make glass effect container full width */
-        max-width: 400px; /* Limit max width for larger screens */
-        height: auto; /* Adjust height based on content */
-    }
-
-    .progress-bar {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-        grid-gap: 10px; /* Smaller gap between items */
-        justify-content: center;
-        align-items: center;
-        padding: 10px; /* Smaller padding if needed */
-        padding-left: 30%;
-        padding-right: 30%;
+    .contact-page h2 {
+        font-size: 26px;
     }
 }
 
-/* Adjustments for very small devices (up to 320px wide) */
-@media (max-width: 320px) {
-    .header, nav a {
-        font-size: 16px; /* Further reduce font sizes for very small screens */
+/* Respect the system "reduce motion" setting: finish entrance animations instantly */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
 
-    .home-content, .about, .services-list, .Skills, .projects, .contact, .footer {
-        padding: 15px; /* Reduce padding for content areas */
-        padding-top: 25%;
-    }
-
-    .home-content h3 {
-        font-size: 24px; /* Adjust home content headings for very small screens */
-    }
-
-    .home-content h4, .about-text h4 {
-        font-size: 20px; /* Adjust font sizes for smaller text elements */
-    }
-
-    .sub-title, .contact-page h3 {
-        font-size: 20px; /* Reduce font size for titles and headings */
-    }
-
-    .services-list, .skills-container, .projects .services-list {
-        grid-template-columns: 1fr; /* Adjust layout for service lists and skills containers */
-    }
-
-    .glass {
-        padding: 15px; /* Adjust padding inside glass effect containers */
-        border-radius: 25px; /* Soften border radius for aesthetic adaptation */
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
 }

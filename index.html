@@ -3,433 +3,409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adnan Ibrahim</title>
+    <title>Adnan Ibrahim | Software Developer</title>
+    <meta name="description" content="Adnan Ibrahim, Software Developer at IBM in Dublin. I set up and automate AI infrastructure using Kubernetes, Helm and Ansible.">
+    <meta name="theme-color" content="#131c2f">
+    <link rel="canonical" href="https://adnanibrahim29.github.io/">
+
+    <!-- Open Graph (LinkedIn, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://adnanibrahim29.github.io/">
+    <meta property="og:title" content="Adnan Ibrahim | Software Developer">
+    <meta property="og:description" content="Software Developer at IBM in Dublin. I set up and automate AI infrastructure using Kubernetes, Helm and Ansible.">
+    <!-- TODO: for a wide preview, add a 1200x630 image (e.g. images/og-image.png) and point og:image/twitter:image at it -->
+    <meta property="og:image" content="https://adnanibrahim29.github.io/images/me.png">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:image:alt" content="Portrait of Adnan Ibrahim">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Adnan Ibrahim | Software Developer">
+    <meta name="twitter:description" content="Software Developer at IBM in Dublin. I set up and automate AI infrastructure using Kubernetes, Helm and Ansible.">
+    <meta name="twitter:image" content="https://adnanibrahim29.github.io/images/me.png">
+    <meta name="twitter:image:alt" content="Portrait of Adnan Ibrahim">
     <link rel="stylesheet" href="stylesheet.css">
-    <link rel="script" href="main.js">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 </head>
 <body>
+    <a class = "skip-link" href = "#main">Skip to content</a>
     <header class = "header">
-        <a href = '#' class = "logo">Adnan <span>Ibrahim</span></a>
-    
-        <nav>
+        <a href = '#home' class = "logo">Adnan <span>Ibrahim</span></a>
+
+        <nav aria-label = "Main">
             <a href = '#home' style="--i:1" class="active">Home</a>
             <a href = '#about' style="--i:2">About</a>
-            <a href = '#univeristy' style="--i:3">Univeristy</a>
-            <a href = '#skills' style="--i:4">Skills</a>
-            <a href = '#projects' style="--i:5">Projects</a>
-            <a href = '#contact' style="--i:6">Contact</a>
+            <a href = '#experience' style="--i:3">Experience</a>
+            <a href = '#education' style="--i:4">Education</a>
+            <a href = '#skills' style="--i:5">Skills</a>
+            <a href = '#projects' style="--i:6">Projects</a>
+            <a href = '#contact' style="--i:7">Contact</a>
         </nav>
     </header>
 
 
+    <main id = "main">
     <!-- Home Content -->
     <section class = "home" id = "home" >
         <div class = "home-content">
-            <h3><span>Hello</span> World!</h3>
-            <h4>I am Adnan, <span class = "text"></span></h4>
-            <p><br> <em>Busy <span>Engineering</span> Dreams</em></p>
+            <p class = "eyebrow"><span>Hello</span> World!</p>
+            <h1>I am Adnan, <span class = "text"></span></h1>
             <div class = "home-sci">
-                <a href = 'https://www.linkedin.com/in/adnan-i-784225262/' target='_blank'  style="--i:7"><i class='bx bxl-linkedin'></i></a>
-                <a href = 'https://github.com/adnanibrahim29' target='_blank' style="--i:8"><i class='bx bxl-github'></i></a>
-                <a href = 'https://wa.me/353830954784' target='_blank' style="--i:9"><i class='bx bxl-whatsapp' ></i></a>
-                <a href = 'mailto:contactadnan29@gmail.com?body=Hey,%20Adnan!%20Lets%20Connect!' target='_blank'  style="--i:10" ><i class='bx bx-envelope'></i></a>
+                <a href = 'https://www.linkedin.com/in/adnan-i-784225262/' target='_blank' rel='noopener' style="--i:7" aria-label="LinkedIn"><i class='bx bxl-linkedin' aria-hidden="true"></i></a>
+                <a href = 'https://github.com/adnanibrahim29' target='_blank' rel='noopener' style="--i:8" aria-label="GitHub"><i class='bx bxl-github' aria-hidden="true"></i></a>
+                <a href = 'mailto:contactadnan29@gmail.com' style="--i:9" aria-label="Email"><i class='bx bx-envelope' aria-hidden="true"></i></a>
             </div>
-            
-            <a href = "CV.pdf" target='_blank' class = "btn-box"> RESUME</a>
+
+            <!-- TODO: add your current CV as CV.pdf in the repo root (it was deleted in commit 5f4a134) -->
+            <a href = "CV.pdf" target='_blank' rel='noopener' class = "btn-box">RESUME</a>
         </div>
     </section>
 
     <section class="about" id = "about">
         <div class = "about-img">
-            <img src = "images/me.png" data-aos="fade-right">
+            <img src = "images/me.png" alt = "Portrait of Adnan Ibrahim" width = "500" height = "500" data-aos="fade-right">
         </div>
-        <div class = "about-text"> 
-            <h2 data-aos="fade-down">About<span>Me</span></h2>
-            <h4 data-aos="fade-up">Student Software Engineer</h4>
-            <p data-aos="fade-left">Currently, I am a student at Maynooth University, 
-                where I'm pursuing a degree in Computer Science & Software Engineering. Driven by cutting-edge technology, 
-                I have experience with multiple programming languages, including Java, SQL, Python, HTML, and CSS, and I am focused on crafting innovative,
-                user-friendly software.
-                <br><br>
-                <span id="more" style="display: none;">
-                    I am committed to continuously expanding my knowledge base not only by advancing my expertise in these 
-                    languages but also by exploring new programming languages and technologies. <br><br>
-                    In my pursuit of technology, I find it crucial to balance my mental and physical well-being.
-                    To achieve this, I often take a step back from the digital world to engage in playing badminton. <br><br> This activity not only keeps me 
-                    physically active but also serves as a refreshing break that rejuvenates my mind. Representing Wexford, Gorey, and Maynooth University in badminton competitions,
-                    I cherish these moments for the clarity and perspective they bring to my professional and personal life.
-                    <br><br>
-                    I am eager to use the skills I have developed to contribute to society and am committed to delivering impactful solutions through creative problem-solving, 
-                    always striving for excellence in every endeavor.
-                </span>
+        <div class = "about-text">
+            <h2 data-aos="fade-down">About <span>Me</span></h2>
+            <p class = "about-role" data-aos="fade-up">Software Developer at IBM, Dublin</p>
+            <p data-aos="fade-left">I'm a Software Developer at IBM in Dublin. I set up and automate
+                AI infrastructure that runs across several sites.
+                I work mostly with Kubernetes, Helm, Ansible and Linux, and I use CI/CD pipelines
+                so every release goes out the same way.
+                I studied Computer Science and Software Engineering at Maynooth University.
+                Outside work I play badminton, and I've played for Wexford, Gorey and Maynooth University.
             </p>
-
-            <a href = "javascript:void(0);" class = "btn-box" onclick="toggleReadMore()"> Read More!</a>
-            
         </div>
     </section>
 
-    <!-- University Modules-->
-    <section class="univeristy" id = "univeristy">
-        <div class ="services" id = "services">
+    <!-- Experience -->
+    <section class="experience" id = "experience">
+        <div class ="services">
             <div class = "container">
-                <h2 class="sub-title" data-aos="fade-down">University <span>Modules</span></h2>
-                <div class="services-list" data-aos="fade-up">
+                <h2 class="sub-title" data-aos="fade-down">Work <span>Experience</span></h2>
+                <div class="services-list single" data-aos="fade-up">
 
-                    <div>
-                        
-                        <h3 ><span> First Year</span></h3>
-                        <i class='bx bx-signal-1' style='color: aqua'></i>
+                    <article>
+                        <i class='bx bx-server' style='color: aqua' aria-hidden="true"></i>
+                        <h3><span>Software Developer</span></h3>
+                        <p class="meta">IBM &middot; Dublin, Ireland &middot; Since <span class="todo">TODO: Month Year</span></p>
+                        <!-- TODO: check each bullet matches your actual work and add a result/metric where you can -->
+                        <ul class="bullets">
+                            <li>Set up and automate AI infrastructure across several sites using Kubernetes (k3s) and Helm.</li>
+                            <li>Write Ansible scripts that set up Linux servers automatically, so there are fewer manual steps.
+                                <span class="todo">TODO: add a result, e.g. "cut setup time from X days to Y hours"</span></li>
+                            <li>Use Skupper to link services running in different locations so they can talk to each other securely.</li>
+                            <li>Help build CI/CD pipelines and Git workflows so every change is tested and released the same way at each site.</li>
+                        </ul>
+                    </article>
 
-                        <ul>Introduction to Programming I & II</ul>
-                        <br>
-                        <ul>Introduction to Data Science I & II</ul>
-                        <br>
-                        <ul>Computer Systems I & II</ul>
-                        <ul>Linear Algebra</ul>
-                        <br>
-                        <ul>Differential Calculus</ul>
-                        <ul>Integral Calculus</ul>
-                    </div>
-                    <div>                     
-                        <h3><span>Second Year (Current)</span></h3>
-                        <i class='bx bx-signal-2' style='color: aqua'></i>  
+                </div>
+            </div>
+        </div>
+    </section>
 
-                        <ul>Data Structures and Algorithms I & II</ul>
-                        <br>
-                        <ul>Computer Architecture</ul>
-                        <ul>Software Testing</ul>
-                        <br>
-                        <ul>Introduction to Statistics</ul>
-                        <ul>Calculus 3</ul>
-                        <ul>Databases</ul>
-                        <br>
-                        <ul>Software Engineering & Software Process</ul>
-                        <br>
-                        <ul>Web Information Processing</ul>
-                        <br>
-                        <ul>Introduction to UX UI</ul>
-                        <ul>Theory of Computation</ul>
-                        <br>
-                        <ul>Operating Systems, Communication and Concurrency</ul>
-                    </div>
+    <!-- Education -->
+    <section class="education" id = "education">
+        <div class ="services">
+            <div class = "container">
+                <h2 class="sub-title" data-aos="fade-down">My <span>Education</span></h2>
+                <div class="services-list single" data-aos="fade-up">
 
-                    <div>                 
-                        <h3><span>Third Year</span></h3>
-                        <i class='bx bx-signal-3' style='color: aqua'></i>  
+                    <article>
+                        <i class='bx bxs-graduation' style='color: aqua' aria-hidden="true"></i>
+                        <h3><span>BSc Computer Science &amp; Software Engineering</span></h3>
+                        <p class="meta">Maynooth University &middot; Graduated <span class="todo">TODO: year</span>
+                            <span class="todo">TODO: grade (optional, delete if not wanted)</span></p>
+                        <p>Key modules: Data Structures &amp; Algorithms, Operating Systems &amp; Concurrency,
+                            Databases, Software Testing, Software Engineering &amp; Software Process.</p>
+                    </article>
 
-                        <ul>Coming Soon...Stay tuned!</ul>
-                    </div>
-
-                    <div>                 
-                        <h3><span>Final Year</span></h3>
-                        <i class='bx bx-signal-4' style='color: aqua'></i>  
-
-                        <ul>Coming Soon...Stay tuned!</ul>
-                    </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills -->
-
-    <!-- Progress Bars for Technical Skills-->
     <section class="Skills" id = "skills">
-        <h1 class = "Skills-subtitle" data-aos="fade-down">My<span>Skills</span></h1>
+        <h2 class = "Skills-subtitle" data-aos="fade-down">My <span>Skills</span></h2>
 
-        <h3 data-aos="fade-right">Technical Skills</h3>
-       <div class="progress-bar" data-aos="fade-right">
- 
-            <!-- Line 127 to 139 
-            for each circle bar-->
-
-            <div class="card">
-                <div class="percent" style="--clr:#DE9ACD;--num:100;">
-                    <div class="dot"></div>
-                    <svg>
-                        <circle cx="70" cy="70" r="70"></circle>
-                        <circle cx="70" cy="70" r="70"></circle>
-                    </svg>
-                    <div class="number">
-                        <p>HTML & CSS</p>
+        <div class="skill-group" data-aos="fade-right">
+            <h3>Languages</h3>
+            <ul class="progress-bar">
+                <li class="card">
+                    <div class="percent" style="--clr:#8BFFAA;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>Java</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="percent" style="--clr:#AFCBBA;--num:100;">
-                    <div class="dot"></div>
-                    <svg>
-                        <circle cx="70" cy="70" r="70"></circle>
-                        <circle cx="70" cy="70" r="70"></circle>
-                    </svg>
-                    <div class="number">
-                        <p>Javascript</p>
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#EF8C9A;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>Python</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="percent" style="--clr:#8BFFAA;--num:100;">
-                    <div class="dot"></div>
-                    <svg>
-                        <circle cx="70" cy="70" r="70"></circle>
-                        <circle cx="70" cy="70" r="70"></circle>
-                    </svg>
-                    <div class="number">
-                        <p>Java</p>
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#AFCBBA;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>JavaScript</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="percent" style="--clr:#EF8C9A;--num:100;">
-                    <div class="dot"></div>
-                    <svg>
-                        <circle cx="70" cy="70" r="70"></circle>
-                        <circle cx="70" cy="70" r="70"></circle>
-                    </svg>
-                    <div class="number">
-                        <p>Python</p>
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#8CD8DD;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>SQL</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="percent" style="--clr:#8CD8DD;--num:100;">
-                    <div class="dot"></div>
-                    <svg>
-                        <circle cx="70" cy="70" r="70"></circle>
-                        <circle cx="70" cy="70" r="70"></circle>
-                    </svg>
-                    <div class="number">
-                        <p>SQL</p>
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#DE9ACD;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>HTML &amp; CSS</p>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
 
-        <!--Dont Forget to delete the h2 from the css !!!-->
-          <!-- Progress Bars for Professional Skills-->
-        <div class="soft-skill" data-aos="fade-left"> 
-
-            <h3>Soft Skills</h3>
-            <div class="progress-bar">
-
-                <!-- Line 127 to 139 
-                for each circle bar-->
-
-                <div class="card">
-                    <div class="percent" style="--clr:#04fc43;--num:100;">
-                        <div class="dot"></div>
-                        <svg>
-                            <circle cx="70" cy="70" r="70"></circle>
-                            <circle cx="70" cy="70" r="70"></circle>
-                        </svg>
-                        <div class="number">
-                            <p>Team Work</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="percent" style="--clr:#F898ED;--num:100;">
-                        <div class="dot"></div>
-                        <svg>
-                            <circle cx="70" cy="70" r="70"></circle>
-                            <circle cx="70" cy="70" r="70"></circle>
-                        </svg>
-                        <div class="number">
-                            <p>Decisive</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="percent" style="--clr:#FBDABB;--num:100;">
-                        <div class="dot"></div>
-                        <svg>
-                            <circle cx="70" cy="70" r="70"></circle>
-                            <circle cx="70" cy="70" r="70"></circle>
-                        </svg>
-                        <div class="number">
-
-                            <p>Analytical</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="percent" style="--clr:#CDDE9E;--num:100;">
-                        <div class="dot"></div>
-                        <svg>
-                            <circle cx="70" cy="70" r="70"></circle>
-                            <circle cx="70" cy="70" r="70"></circle>
-                        </svg>
-                        <div class="number">
-                            <p>Leadership</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="percent" style="--clr:#e6220d;--num:100;">
-                        <div class="dot"></div>
-                        <svg>
-                            <circle cx="70" cy="70" r="70"></circle>
-                            <circle cx="70" cy="70" r="70"></circle>
-                        </svg>
-                        <div class="number">
-                            <p>Innovative</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
+        <div class="skill-group" data-aos="fade-left">
+            <h3>Infrastructure &amp; DevOps</h3>
+            <ul class="progress-bar">
+                <li class="card">
                     <div class="percent" style="--clr:#BBCDEF;--num:100;">
                         <div class="dot"></div>
-                        <svg>
+                        <svg aria-hidden="true">
                             <circle cx="70" cy="70" r="70"></circle>
                             <circle cx="70" cy="70" r="70"></circle>
                         </svg>
                         <div class="number">
-                            <p>Creativity</p>
+                            <p>Kubernetes</p>
                         </div>
                     </div>
-                </div>
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#FBDABB;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>Helm</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#F898ED;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>Ansible</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#CDDE9E;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>Linux</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-                <div class="card">
+        <div class="skill-group" data-aos="fade-right">
+            <h3>Tools &amp; Practices</h3>
+            <ul class="progress-bar">
+                <li class="card">
                     <div class="percent" style="--clr:#DD6622;--num:100;">
                         <div class="dot"></div>
-                        <svg>
+                        <svg aria-hidden="true">
                             <circle cx="70" cy="70" r="70"></circle>
                             <circle cx="70" cy="70" r="70"></circle>
                         </svg>
                         <div class="number">
-                            <p>Collaboration</p>
+                            <p>Git</p>
                         </div>
                     </div>
-                </div>
-            </div>
-         </div> 
+                </li>
+                <li class="card">
+                    <div class="percent" style="--clr:#04fc43;--num:100;">
+                        <div class="dot"></div>
+                        <svg aria-hidden="true">
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>CI/CD</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
     </section>
 
     <section class="projects" id = "projects">
-        <div class ="services" id = "services">
+        <div class ="services">
             <div class = "container">
-                <h2 class="sub-title" data-aos="fade-down">Projects <span>Completed</span></h2>
+                <h2 class="sub-title" data-aos="fade-down">My <span>Projects</span></h2>
+                <!-- TODO: second placeholder card. Public repos you could feature: CloudGuardian, CovidDetector -->
                 <div class="services-list" data-aos="fade-up">
 
-                    <!-- Icons from Boxicons-->
-                    <div>
-                        <h3><span>Portfolio Website</span></h3>
-                        <i class='bx bx-cloud' style='color: aqua'></i>
-                        <p>A Portfolio Website as a Web Development project. 
-                            I have about me, Skills and University Modules as well as mu projects done to date.
-                        </p>
-                        <br>
-                        <h4>Languages used: </h4>
-                        <br>
-                        <ul>HTML, CSS, JAVASCRIPT</ul>
-                        <br>
+                    <article>
+                        <i class='bx bx-food-menu' style='color: aqua' aria-hidden="true"></i>
+                        <h3><span>EPOS Restaurant Ordering App</span></h3>
+                        <dl class="project-details">
+                            <dt>Problem</dt>
+                            <dd><span class="todo">TODO: what problem it solves</span></dd>
+                            <dt>What I built</dt>
+                            <dd><span class="todo">TODO: what you built</span></dd>
+                            <dt>Tech</dt>
+                            <dd><span class="todo">TODO: tech used</span></dd>
+                        </dl>
+                        <span class="todo">TODO: GitHub link</span>
+                    </article>
 
-                        <div class="icons-container">
+                    <article>
+                        <i class='bx bx-code-alt' style='color: aqua' aria-hidden="true"></i>
+                        <h3><span><span class="todo">TODO: project name</span></span></h3>
+                        <dl class="project-details">
+                            <dt>Problem</dt>
+                            <dd><span class="todo">TODO: what problem it solves</span></dd>
+                            <dt>What I built</dt>
+                            <dd><span class="todo">TODO: what you built</span></dd>
+                            <dt>Tech</dt>
+                            <dd><span class="todo">TODO: tech used</span></dd>
+                        </dl>
+                        <span class="todo">TODO: GitHub link</span>
+                    </article>
+
+                    <article>
+                        <i class='bx bx-cloud' style='color: aqua' aria-hidden="true"></i>
+                        <h3><span>Portfolio Website</span></h3>
+                        <dl class="project-details">
+                            <dt>Problem</dt>
+                            <dd>I wanted one place to show my work and make it easy for people to contact me.</dd>
+                            <dt>What I built</dt>
+                            <dd>This website. It works on phones and computers and is hosted on GitHub Pages.</dd>
+                            <dt>Tech</dt>
+                            <dd>HTML, CSS, JavaScript</dd>
+                        </dl>
+                        <div class="icons-container" aria-hidden="true">
                             <i class='bx bxl-html5' style='color: #f06529'></i>
                             <i class='bx bxl-css3' style='color: #2965f1'></i>
                             <i class='bx bxl-javascript' style='color: #f0db4f'></i>
                         </div>
-                    </div>
+                        <a class="read" href="https://github.com/adnanibrahim29/adnanibrahim29.github.io" target="_blank" rel="noopener">View on GitHub</a>
+                    </article>
 
-                    <div>                     
+                    <article>
+                        <i class='bx bx-game' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>Blackjack</span></h3>
-                        <i class='bx bx-game' style='color: aqua'></i>  
-
-                        <p>This is a simplified Blackjack game. Played with standard deck of cards.
-                            The goal is to get as close to 21 as possible without going over.
-                            The player is playing against the dealer which is the computer.
-                        </p>
-                        <br>
-                        <h4>Languages used: </h4>
-                        <br>
-                        <ul>JAVA</ul>
-                        <br>
-                        <div class="icons-container">
+                        <dl class="project-details">
+                            <dt>Problem</dt>
+                            <dd>I wanted to practise turning the rules of a card game into code.</dd>
+                            <dt>What I built</dt>
+                            <dd>A simple Blackjack game where you play against the computer. The goal is to get as close to 21 as you can without going over.</dd>
+                            <dt>Tech</dt>
+                            <dd>Java</dd>
+                        </dl>
+                        <div class="icons-container" aria-hidden="true">
                             <i class='bx bxl-java' style='color: #f89820'></i>
                         </div>
-                        
-                    </div>
+                        <a class="read" href="https://github.com/adnanibrahim29/Blackjack" target="_blank" rel="noopener">View on GitHub</a>
+                    </article>
 
-                     <div>                     
+                    <article>
+                        <i class='bx bx-money-withdraw' style='color: aqua' aria-hidden="true"></i>
                         <h3><span>ATM</span></h3>
-                        <i class='bx bx-money-withdraw' style='color: aqua;' ></i>
-                        
-                        <p>This is a simplified ATM machine. 
-                            The user can deposit, withdraw and check balance.
-                            Uses a 4 digit password to access the account on start.
-                        </p>
-                        <br>
-                        <h4>Languages used: </h4>
-                        <br>
-                        <ul>JAVA</ul>
-                        <br>
-                        
-                        <div class="icons-container">
+                        <dl class="project-details">
+                            <dt>Problem</dt>
+                            <dd>I wanted to practise keeping track of a bank balance and adding a simple PIN check.</dd>
+                            <dt>What I built</dt>
+                            <dd>A simple ATM. You enter a 4-digit PIN, then you can deposit money, take money out and check your balance.</dd>
+                            <dt>Tech</dt>
+                            <dd>Java</dd>
+                        </dl>
+                        <div class="icons-container" aria-hidden="true">
                             <i class='bx bxl-java' style='color: #f89820'></i>
                         </div>
-                        
-                    </div>
-
-                    <div>                     
-                        <h3><span>Coming Soon!</span></h3>
-                        <i class='bx bx-code-alt' style='color: aqua'></i>
-                        <p>Building More Projects Stay Tuned!</p>
-                    </div>
+                        <a class="read" href="https://github.com/adnanibrahim29/ATM" target="_blank" rel="noopener">View on GitHub</a>
+                    </article>
                 </div>
             </div>
         </div>
     </section>
 
-    <section></section>
     <section  id="contact" class="contact"> 
         <div class = "contact-page">
             <div class="glass">
-                <h3 data-aos="fade-right">Lets <span>Work</span> Together!</h3>
-                <p class="greeting" data-aos="fade-left"><br> <span>Come</span> Connect <span>With </span> Me! </p>
-                <br>
-                <p data-aos="fade-right">You Can <span>Connect With</span> me on:</p>
-                <p data-aos="fade-left">LinkedIn, <span>Github</span>, WhatsApp, <span>Email</span></p>
-                <p data-aos="fade-right">Click on the buttons Below!</p>
-    
+                <h2 data-aos="fade-right">Let's <span>Work</span> Together!</h2>
+                <p class="greeting" data-aos="fade-left"><span>Come</span> Connect <span>With</span> Me!</p>
+                <p data-aos="fade-right">Find me on <span>LinkedIn</span> and <span>GitHub</span>, or email me at
+                    <a class="email-link" href="mailto:contactadnan29@gmail.com">contactadnan29@gmail.com</a></p>
+
                 <div class = "home-sci" data-aos="fade-left">
-                    <a href = 'https://www.linkedin.com/in/adnan-i-784225262/' target='_blank'  style="--i:7"><i class='bx bxl-linkedin'></i></a>
-                    <a href = 'https://github.com/adnanibrahim29' target='_blank' style="--i:8"><i class='bx bxl-github'></i></a>
-                    <a href = 'https://wa.me/353830954784' target='_blank' style="--i:9"><i class='bx bxl-whatsapp' ></i></a>
-                    <a href = 'mailto:contactadnan29@gmail.com?body=Hey,%20Adnan!%20Lets%20Connect!' target='_blank'  style="--i:10" ><i class='bx bx-envelope'></i></a>
+                    <a href = 'https://www.linkedin.com/in/adnan-i-784225262/' target='_blank' rel='noopener' style="--i:7" aria-label="LinkedIn"><i class='bx bxl-linkedin' aria-hidden="true"></i></a>
+                    <a href = 'https://github.com/adnanibrahim29' target='_blank' rel='noopener' style="--i:8" aria-label="GitHub"><i class='bx bxl-github' aria-hidden="true"></i></a>
+                    <a href = 'mailto:contactadnan29@gmail.com' style="--i:9" aria-label="Email"><i class='bx bx-envelope' aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
     </section>
-
-    
-        
+    </main>
 
     <footer class = "footer" data-aos="fade-up">
         <p>Created <span>By</span> Adnan <span>Ibrahim</span></p>
-        <p>&copy; 20<span>24</span> || All Rights Reserved.</p>
+        <p>&copy; <span id="year">2026</span> || All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="main.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
       AOS.init({
-        duration: 2000
+        duration: 2000,
+        disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
       });
     </script>
 </body>
