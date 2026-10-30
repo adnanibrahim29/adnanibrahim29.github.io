@@ -3,8 +3,34 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
     font-family: 'poppins', monospace;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* keep section titles clear of the fixed header */
+}
+
+/* Accessibility */
+:focus-visible {
+    outline: 3px solid gold;
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 200;
+    padding: 10px 16px;
+    background: gold;
+    color: #131c2f;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.skip-link:focus {
+    top: 16px;
 }
 body {
     margin: auto;
@@ -67,6 +93,7 @@ nav a {
 }
 
 nav a:hover,
+nav a:focus-visible,
 nav a.active {
     color: gold;
 }
@@ -142,7 +169,8 @@ nav a.active {
     
 }
 
-.home-sci a:hover {
+.home-sci a:hover,
+.home-sci a:focus-visible {
     background: white;
     color: #111;
     box-shadow: 0 0 20px gold;
@@ -169,7 +197,8 @@ nav a.active {
     box-shadow: 0 0 5px gold, 0 0 25px gold;
 }
 
-.btn-box:hover {
+.btn-box:hover,
+.btn-box:focus-visible {
     box-shadow: 0 0 5px gold,
     0 0 25px gold, 0 0 50px gold, 0 0 100px gold, 0 0 200px gold;
 }
@@ -353,7 +382,8 @@ nav a.active {
     box-shadow: 0 0 5px gold ,0 0 25px gold;
 }
 
-.read:hover {
+.read:hover,
+.read:focus-visible {
     box-shadow: 0 0 5px gold,
     0 0 25px gold, 0 0 50px gold, 0 0 100px gold, 0 0 200px gold;
 }
@@ -498,7 +528,7 @@ nav a.active {
     align-items: center;
     flex-direction: column;
     opacity: 0;
-    animation: fadeIn 2s linear infinite;
+    animation: fadeIn 2s linear forwards;
     animation-delay: 1.5s;
 }
 
@@ -590,7 +620,8 @@ nav a.active {
     margin-bottom: 10rem;
 }
 
-.contact .home-sci a:hover {
+.contact .home-sci a:hover,
+.contact .home-sci a:focus-visible {
     background: white;
     color: #111;
     box-shadow: 0 0 20px gold;
@@ -891,5 +922,19 @@ nav a.active {
     .glass {
         padding: 15px; /* Adjust padding inside glass effect containers */
         border-radius: 25px; /* Soften border radius for aesthetic adaptation */
+    }
+}
+
+/* Respect the system "reduce motion" setting: finish entrance animations instantly */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
 }
