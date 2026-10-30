@@ -217,7 +217,7 @@ nav a.active {
     padding-right: 4rem;
 }
 
-/* University Modules */
+/* Card sections: Experience, Education, Projects */
 .services {
     color: white;
     font-size: 35px;
@@ -253,30 +253,65 @@ nav a.active {
     color: white;
 }
 
-.services-list div {
+.services-list > * {
     background: #131c2f;
-    background-position: 50%; 
+    background-position: 50%;
     color:gold;
     padding: 25px;
-    font-size: 13px;
-    font-weight: 13px;
-    border-right: 10px;
+    font-size: 15px;
     border-radius: 20px;
     transition: background 0.5s, transform 0.5s;
     box-shadow: 1px 1px 20px wheat,
                 1px 1px 40px gold
-               
+
 }
 
-.services-list div i {
+.services-list > * > i {
     font-size: 50px;
     margin-bottom: 10px;
 }
 
-.services-list div h3 {
+.services-list h3 {
     font-size: 17px;
     font-weight: 500;
     margin-top: 10px;
+}
+
+.services-list.single {
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+.services-list .meta {
+    color: wheat;
+    margin: 6px 0 16px;
+}
+
+.services-list .bullets {
+    text-align: left;
+    color: white;
+    line-height: 1.6;
+    padding-left: 20px;
+}
+
+.services-list .bullets li {
+    margin-bottom: 8px;
+}
+
+.services-list .bullets li::marker {
+    color: gold;
+}
+
+/* Placeholder for content still to be filled in */
+.todo,
+.services-list span.todo {
+    color: #131c2f;
+    background: #ffd54f;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: 600;
 }
 
 .services-list div a {
@@ -308,7 +343,7 @@ nav a.active {
     0 0 25px gold, 0 0 50px gold, 0 0 100px gold, 0 0 200px gold;
 }
 
-.services-list div:hover {
+.services-list > *:hover {
     transform: translateY(-40px);
 }
 

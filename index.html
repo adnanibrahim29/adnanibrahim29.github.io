@@ -16,10 +16,11 @@
         <nav>
             <a href = '#home' style="--i:1" class="active">Home</a>
             <a href = '#about' style="--i:2">About</a>
-            <a href = '#university' style="--i:3">University</a>
-            <a href = '#skills' style="--i:4">Skills</a>
-            <a href = '#projects' style="--i:5">Projects</a>
-            <a href = '#contact' style="--i:6">Contact</a>
+            <a href = '#experience' style="--i:3">Experience</a>
+            <a href = '#education' style="--i:4">Education</a>
+            <a href = '#skills' style="--i:5">Skills</a>
+            <a href = '#projects' style="--i:6">Projects</a>
+            <a href = '#contact' style="--i:7">Contact</a>
         </nav>
     </header>
 
@@ -59,65 +60,49 @@
         </div>
     </section>
 
-    <!-- University Modules-->
-    <section class="university" id = "university">
+    <!-- Experience -->
+    <section class="experience" id = "experience">
         <div class ="services">
             <div class = "container">
-                <h2 class="sub-title" data-aos="fade-down">University <span>Modules</span></h2>
-                <div class="services-list" data-aos="fade-up">
+                <h2 class="sub-title" data-aos="fade-down">Work <span>Experience</span></h2>
+                <div class="services-list single" data-aos="fade-up">
 
-                    <div>
-                        
-                        <h3 ><span> First Year</span></h3>
-                        <i class='bx bx-signal-1' style='color: aqua'></i>
+                    <article>
+                        <i class='bx bx-server' style='color: aqua' aria-hidden="true"></i>
+                        <h3><span>Software Developer</span></h3>
+                        <p class="meta">IBM &middot; Dublin, Ireland &middot; <span class="todo">TODO: Month Year</span> &ndash; Present</p>
+                        <!-- TODO: check each bullet matches your actual work and add a result/metric where you can -->
+                        <ul class="bullets">
+                            <li>Build and automate deployments of an AI infrastructure platform across multiple sites,
+                                packaging services with Helm and running them on Kubernetes (k3s).</li>
+                            <li>Write Ansible automation to provision and configure Linux hosts, replacing manual setup steps.
+                                <span class="todo">TODO: add a result, e.g. "cut site setup from X days to Y hours"</span></li>
+                            <li>Connect workloads across sites with Skupper so services in separate clusters can communicate securely.</li>
+                            <li>Contribute to CI/CD pipelines and Git workflows so changes are tested and rolled out the same way at every site.</li>
+                        </ul>
+                    </article>
 
-                        <ul>Introduction to Programming I & II</ul>
-                        <br>
-                        <ul>Introduction to Data Science I & II</ul>
-                        <br>
-                        <ul>Computer Systems I & II</ul>
-                        <ul>Linear Algebra</ul>
-                        <br>
-                        <ul>Differential Calculus</ul>
-                        <ul>Integral Calculus</ul>
-                    </div>
-                    <div>                     
-                        <h3><span>Second Year (Current)</span></h3>
-                        <i class='bx bx-signal-2' style='color: aqua'></i>  
+                </div>
+            </div>
+        </div>
+    </section>
 
-                        <ul>Data Structures and Algorithms I & II</ul>
-                        <br>
-                        <ul>Computer Architecture</ul>
-                        <ul>Software Testing</ul>
-                        <br>
-                        <ul>Introduction to Statistics</ul>
-                        <ul>Calculus 3</ul>
-                        <ul>Databases</ul>
-                        <br>
-                        <ul>Software Engineering & Software Process</ul>
-                        <br>
-                        <ul>Web Information Processing</ul>
-                        <br>
-                        <ul>Introduction to UX UI</ul>
-                        <ul>Theory of Computation</ul>
-                        <br>
-                        <ul>Operating Systems, Communication and Concurrency</ul>
-                    </div>
+    <!-- Education -->
+    <section class="education" id = "education">
+        <div class ="services">
+            <div class = "container">
+                <h2 class="sub-title" data-aos="fade-down">My <span>Education</span></h2>
+                <div class="services-list single" data-aos="fade-up">
 
-                    <div>                 
-                        <h3><span>Third Year</span></h3>
-                        <i class='bx bx-signal-3' style='color: aqua'></i>  
+                    <article>
+                        <i class='bx bxs-graduation' style='color: aqua' aria-hidden="true"></i>
+                        <h3><span>BSc Computer Science &amp; Software Engineering</span></h3>
+                        <p class="meta">Maynooth University &middot; Graduated <span class="todo">TODO: year</span>
+                            <span class="todo">TODO: grade (optional, delete if not wanted)</span></p>
+                        <p>Key modules: Data Structures &amp; Algorithms, Operating Systems &amp; Concurrency,
+                            Databases, Software Testing, Software Engineering &amp; Software Process.</p>
+                    </article>
 
-                        <ul>Coming Soon...Stay tuned!</ul>
-                    </div>
-
-                    <div>                 
-                        <h3><span>Final Year</span></h3>
-                        <i class='bx bx-signal-4' style='color: aqua'></i>  
-
-                        <ul>Coming Soon...Stay tuned!</ul>
-                    </div>
-                    </div>
                 </div>
             </div>
         </div>
