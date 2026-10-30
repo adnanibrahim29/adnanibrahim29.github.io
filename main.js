@@ -1,3 +1,11 @@
+var typed = new Typed(".text", {
+    strings: ["Engineer", "Innovator", "Entrepreneur", "Developer", "Designer"],
+    typeSpeed: 100,
+    backspeed: 100,
+    backDelay: 1000,
+    loop:true
+})
+
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
 
