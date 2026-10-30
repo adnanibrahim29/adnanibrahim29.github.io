@@ -1,5 +1,5 @@
-// Contact background: a slowly spinning globe of dots with Dublin marked and signals arcing out from it.
-// Purely decorative. If WebGL or the three.js CDN is unavailable, the section keeps its CSS background.
+// Hero background: a slowly spinning globe of dots with Dublin marked and signals arcing out from it.
+// Purely decorative. If WebGL or the three.js CDN is unavailable, the hero keeps its CSS background.
 import { mountScene, createGlowTexture, reducedMotion } from './three-stage.js';
 
 // Settings
@@ -7,8 +7,9 @@ const DOT_COUNT_DESKTOP = 1400;
 const DOT_COUNT_MOBILE = 700;
 const MOBILE_BREAKPOINT = 768;            // px, matches the stylesheet's phone/tablet breakpoint
 const GLOBE_RADIUS = 4;                   // world units
-const GLOBE_FILL = 0.85;                  // globe diameter as a share of the section height
+const GLOBE_FILL = 0.7;                   // globe diameter as a share of the section height
 const MAX_WIDTH_FILL = 1.3;               // on narrow screens, at most this share of the section width
+const DESKTOP_OFFSET = 0.2;               // shift right by this share of the width, clear of the hero text
 const DOT_COLOUR = '#f5deb3';             // wheat
 const DOT_OPACITY = 0.5;
 const DOT_SIZE = 0.12;
@@ -22,11 +23,11 @@ const SIGNAL_COUNT = 5;
 const SIGNAL_DURATION = 3;                // seconds for one signal to travel and fade
 const SIGNAL_HEIGHT = 0.4;                // how high arcs rise above the surface
 const ROTATION_SPEED = 0.06;              // radians per second
-const AXIAL_TILT = 0.1;                   // radians; leans the north pole toward the viewer
+const AXIAL_TILT = 0.35;                  // radians; leans the north pole toward the viewer
 
 const ARC_SEGMENTS = 64;
 
-mountScene(document.querySelector('.contact'), ({ THREE, scene, camera }) => {
+mountScene(document.querySelector('.home'), ({ THREE, scene, camera }) => {
     const tilt = new THREE.Group();
     tilt.rotation.x = AXIAL_TILT;
     scene.add(tilt);
@@ -162,6 +163,10 @@ mountScene(document.querySelector('.contact'), ({ THREE, scene, camera }) => {
             const fill = Math.min(GLOBE_FILL, MAX_WIDTH_FILL * camera.aspect);
             const halfFov = THREE.MathUtils.degToRad(camera.fov / 2);
             camera.position.z = GLOBE_RADIUS / (fill * Math.tan(halfFov));
+
+            // Text is left-aligned on desktop and centred on phones
+            const visibleWidth = 2 * camera.position.z * Math.tan(halfFov) * camera.aspect;
+            tilt.position.x = window.innerWidth > MOBILE_BREAKPOINT ? visibleWidth * DESKTOP_OFFSET : 0;
         }
     };
 
@@ -174,4 +179,4 @@ mountScene(document.querySelector('.contact'), ({ THREE, scene, camera }) => {
             radius * Math.sin(phi) * Math.sin(theta)
         );
     }
-}, { className: 'contact-canvas', fov: 45 });
+}, { className: 'hero-canvas', fov: 45 });
