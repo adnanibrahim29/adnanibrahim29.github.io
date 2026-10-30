@@ -202,6 +202,7 @@ async function init() {
     const parallaxTarget = new THREE.Vector2();
 
     function onPointerMove(event) {
+        if (event.pointerType !== 'mouse') return;
         parallaxTarget.set(
             (event.clientX / window.innerWidth) * 2 - 1,
             -((event.clientY / window.innerHeight) * 2 - 1)
@@ -277,6 +278,8 @@ async function init() {
     // Section heights change as images, fonts and the typed text settle
     new ResizeObserver(measureStations).observe(document.body);
     window.addEventListener('pointermove', onPointerMove, { passive: true });
+    // Phone tilt from the "Enable motion" button (js/tilt.js) moves the camera like the mouse does
+    window.addEventListener('devicetilt', event => parallaxTarget.set(event.detail.x, event.detail.y));
     document.addEventListener('visibilitychange', updateLoop);
     canvas.addEventListener('webglcontextlost', onContextLost);
 
