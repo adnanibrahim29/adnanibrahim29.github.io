@@ -551,8 +551,14 @@ nav a.active {
     font-weight: 600;
     margin-bottom: 20px;
 }
-.contact-page h3 {
-    font-size: 60px;;
+.contact-page h2 {
+    font-size: 60px;
+}
+
+.contact-page .email-link {
+    color: gold;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
 }
 
 .contact-page span {
@@ -584,7 +590,7 @@ nav a.active {
     margin-bottom: 10rem;
 }
 
-.contact a:hover {
+.contact .home-sci a:hover {
     background: white;
     color: #111;
     box-shadow: 0 0 20px gold;
@@ -792,7 +798,7 @@ nav a.active {
         padding: 0 10%;
     }
 
-    .contact-page h3{
+    .contact-page h2{
         font-size: 35px;
     }
 
@@ -839,7 +845,7 @@ nav a.active {
         font-size: 26px; /* Reduce font size for headings */
     }
 
-    .home-content h1, .sub-title, .contact-page h3 {
+    .home-content h1, .sub-title, .contact-page h2 {
         font-size: 22px; /* Slightly reduce font size for subheadings */
     }
 
@@ -874,7 +880,7 @@ nav a.active {
         font-size: 20px; /* Adjust font sizes for smaller text elements */
     }
 
-    .sub-title, .contact-page h3 {
+    .sub-title, .contact-page h2 {
         font-size: 20px; /* Reduce font size for titles and headings */
     }
 
