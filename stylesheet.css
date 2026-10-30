@@ -112,7 +112,35 @@ nav a.active {
     padding: 70px 10% 0;
 }
 
+/* Three.js network (js/hero-scene.js) sits between the background image and the text */
+.hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.hero-canvas.is-ready {
+    opacity: 1;
+}
+
+/* Darken the text side so the network never competes with the copy */
+.home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(19, 28, 47, .75) 0%, rgba(19, 28, 47, .4) 45%, rgba(19, 28, 47, 0) 75%);
+}
+
 .home-content {
+    position: relative;
+    z-index: 2;
     max-width: 600px;
 }
 
@@ -747,6 +775,11 @@ nav a.active {
         justify-content: center;
         padding: 140px 20px 60px;
         text-align: center;
+    }
+
+    /* Text is centred on phones, so darken evenly instead of from the left */
+    .home::before {
+        background: rgba(19, 28, 47, .55);
     }
 
     .home-content .eyebrow {
