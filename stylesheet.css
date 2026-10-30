@@ -314,12 +314,27 @@ nav a.active {
     font-weight: 600;
 }
 
-.services-list div a {
-    text-decoration: none;
-    color: black;
+.project-details {
+    text-align: left;
+    margin: 16px 0;
+}
+
+.project-details dt {
+    color: wheat;
     font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 12px;
+}
+
+.project-details dd {
+    color: white;
+    line-height: 1.5;
+}
+
+.services-list .read {
     margin-top: 20px;
-    display: inline-block;
 }
 
 .read {
@@ -517,10 +532,7 @@ nav a.active {
 }
 
 .icons-container {
-    display: row;
-    align-content: center;
-    height: 10; /* Adjust height as needed */
-    background-color: #131c2f;
+    font-size: 30px;
 }
 
 .contact {
