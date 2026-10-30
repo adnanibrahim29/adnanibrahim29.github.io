@@ -4,7 +4,7 @@
 
 // Settings
 const NODE_COUNT_DESKTOP = 220;
-const NODE_COUNT_MOBILE = 90;
+const NODE_COUNT_MOBILE = 120;
 const MOBILE_BREAKPOINT = 768;            // px, matches the stylesheet's phone/tablet breakpoint
 const COLOURS = {
     gold: '#ffd700',
@@ -24,8 +24,19 @@ const FOG_DENSITY = 0.016;                // higher = distant nodes fade sooner
 const PARALLAX_STRENGTH = 1.2;            // how far the camera drifts toward the mouse
 const PARALLAX_EASING = 2;                // higher = camera follows the mouse faster
 const SCROLL_EASING = 3;                  // higher = camera catches up with the scroll position faster
-const NARROW_PULLBACK = 1.2;              // on portrait screens, move the camera back so the scene fits
+const NARROW_PULLBACK = 0.8;              // on portrait screens, move the camera back so the scene fits
 const MAX_PIXEL_RATIO = 2;
+
+// Section effects (each fades in as the camera nears that section's station)
+const HERO_SWAY = 0.25;                   // radians the hero view swings side to side
+const ORBIT_RANGE = 0.8;                  // radians the Projects view orbits either way
+const ORBIT_SPEED = 0.15;                 // speed of the hero sway and Projects orbit
+const ABOUT_GLOW_SIZE = 2.2;              // glow around the highlighted node at About
+const PULSE_COUNT_DESKTOP = 16;           // pulses travelling along the backbone at Experience
+const PULSE_COUNT_MOBILE = 8;
+const PULSE_SPEED = 0.25;                 // backbone links per second
+const SKILL_LIGHT_SPEED = 4;              // how fast a constellation node lights up when its skill scrolls into view
+const CONTACT_BRIGHTNESS = 0.8;           // how much brighter the network gets at Contact
 
 // Cluster centres ("sites"). The first one is the highlighted node for About.
 const SITES = [
@@ -49,7 +60,7 @@ const STATIONS = [
     { section: 'education', position: [-1, -2, -5], target: SITES[3] },
     { section: 'skills', position: [0, 15, 7], target: SKILLS_CENTRE },
     { section: 'projects', position: [0, 4, 24], target: [0, 0, 0] },
-    { section: 'contact', position: [0, 8, 44], target: [0, 0, 0] }
+    { section: 'contact', position: [0, 6, 36], target: [0, 0, 0] }
 ];
 
 const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
@@ -125,6 +136,66 @@ async function init() {
     }
 
     let progress = 0;
+    let elapsed = 0;
+
+    // How close the camera is to a section's station: 1 at the station, fading to 0 at its neighbours
+    const stationIndex = Object.fromEntries(STATIONS.map((station, index) => [station.section, index]));
+
+    function weight(section) {
+        return Math.max(0, 1 - Math.abs(progress - stationIndex[section]));
+    }
+
+    // Skills: each constellation node lights up in its ring's colour while that ring is on screen
+    const skillCards = [...document.querySelectorAll('.Skills .card')];
+    const skillLit = new Float32Array(skillCards.length);
+    const skillLevel = new Float32Array(skillCards.length);
+    const skillColours = skillCards.map(card =>
+        new THREE.Color(getComputedStyle(card.querySelector('.percent')).getPropertyValue('--clr').trim() || COLOURS.wheat));
+    const skillDim = new THREE.Color(COLOURS.wheat).multiplyScalar(0.3);
+    const skillColour = new THREE.Color();
+    const skillObserver = new IntersectionObserver(entries => {
+        for (const entry of entries) skillLit[skillCards.indexOf(entry.target)] = entry.isIntersecting ? 1 : 0;
+    }, { threshold: 0.6 });
+    skillCards.forEach(card => skillObserver.observe(card));
+
+    function updateEffects(delta) {
+        // About: pulsing glow on the highlighted node
+        const about = weight('about');
+        world.aboutGlow.material.opacity = 0.7 * about;
+        world.aboutGlow.scale.setScalar(ABOUT_GLOW_SIZE * (0.6 + 0.4 * about) * (1 + 0.12 * Math.sin(elapsed * 3)));
+
+        // Experience: pulses travel hub to hub, brighter near the station
+        const experience = weight('experience');
+        const pulsePositions = world.pulses.geometry.attributes.position;
+        world.pulseState.forEach((pulse, index) => {
+            pulse.t += pulse.speed * delta;
+            if (pulse.t > 1) Object.assign(pulse, randomPulse(), { t: pulse.t - 1 });
+            const [from, to] = BACKBONE[pulse.link].map(site => SITES[site]);
+            const t = pulse.reverse ? 1 - pulse.t : pulse.t;
+            pulsePositions.setXYZ(index, ...from.map((value, axis) => value + (to[axis] - value) * t));
+        });
+        pulsePositions.needsUpdate = true;
+        world.pulses.material.opacity = 0.25 + 0.75 * experience;
+        world.backboneMaterial.opacity = BACKBONE_OPACITY + 0.25 * experience;
+
+        // Skills: light the constellation as skills scroll into view
+        const ease = 1 - Math.exp(-SKILL_LIGHT_SPEED * delta);
+        const colours = world.skillNodes.geometry.attributes.color;
+        for (let i = 0; i < skillCards.length; i++) {
+            skillLevel[i] += (skillLit[i] - skillLevel[i]) * ease;
+            skillColour.copy(skillDim).lerp(skillColours[i], skillLevel[i]);
+            colours.setXYZ(i, skillColour.r, skillColour.g, skillColour.b);
+        }
+        colours.needsUpdate = true;
+        world.skillLinks.material.opacity = 0.15 + 0.45 * weight('skills');
+
+        // Contact: the fog lifts and the whole network brightens
+        const contact = weight('contact');
+        scene.fog.density = FOG_DENSITY * (1 - 0.6 * contact);
+        world.nodeMaterial.size = NODE_SIZE * (1 + 0.4 * CONTACT_BRIGHTNESS * contact);
+        world.hubMaterial.size = HUB_SIZE * (1 + 0.4 * CONTACT_BRIGHTNESS * contact);
+        world.linkMaterial.opacity = 1 + CONTACT_BRIGHTNESS * contact;
+    }
 
     // Mouse parallax: the camera eases toward an offset set by the pointer position
     const parallax = new THREE.Vector2();
@@ -142,11 +213,13 @@ async function init() {
     function tick(time) {
         const delta = lastTime === null ? 0 : Math.min((time - lastTime) / 1000, 0.1);
         lastTime = time;
+        elapsed += delta;
 
         for (const cluster of world.clusters) cluster.rotation.y += CLUSTER_SPIN * delta;
 
         progress += (scrollProgress() - progress) * (1 - Math.exp(-SCROLL_EASING * delta));
         parallax.lerp(parallaxTarget, 1 - Math.exp(-PARALLAX_EASING * delta));
+        updateEffects(delta);
         placeCamera();
 
         renderer.render(scene, camera);
@@ -162,6 +235,11 @@ async function init() {
             offset.subVectors(camera.position, cameraTarget).multiplyScalar(1 + (1 - camera.aspect) * NARROW_PULLBACK);
             camera.position.addVectors(cameraTarget, offset);
         }
+
+        // The hero sways gently and Projects orbits slowly around what the camera looks at
+        const swing = Math.sin(elapsed * ORBIT_SPEED) * (HERO_SWAY * weight('home') + ORBIT_RANGE * weight('projects'));
+        offset.subVectors(camera.position, cameraTarget).applyAxisAngle(worldUp, swing);
+        camera.position.addVectors(cameraTarget, offset);
 
         // Parallax: nudge the camera sideways and up in its own frame
         offset.subVectors(cameraTarget, camera.position).normalize();
@@ -303,7 +381,7 @@ function buildWorld(THREE, scene, glowTexture) {
     const skillColours = new Float32Array(skillCount * 3).fill(0.5);
     const skillNodes = new THREE.Points(
         geometry(THREE, { position: [skillPositions, 3], color: [skillColours, 3] }),
-        new THREE.PointsMaterial({ size: 0.9, map: glowTexture, vertexColors: true, transparent: true, depthWrite: false })
+        new THREE.PointsMaterial({ size: 1.6, map: glowTexture, vertexColors: true, transparent: true, depthWrite: false })
     );
     const skillLinks = new THREE.LineSegments(
         geometry(THREE, { position: [skillLinkPositions, 3] }),
@@ -311,7 +389,39 @@ function buildWorld(THREE, scene, glowTexture) {
     );
     scene.add(skillNodes, skillLinks);
 
-    return { clusters, nodeMaterial, linkMaterial, hubMaterial, backboneMaterial, skillNodes, skillLinks };
+    // About: a glow that appears around the first site's hub
+    const aboutGlow = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: glowTexture,
+        color: COLOURS.gold,
+        transparent: true,
+        depthWrite: false,
+        opacity: 0
+    }));
+    aboutGlow.position.set(...SITES[0]);
+    scene.add(aboutGlow);
+
+    // Experience: pulses that travel along the backbone (positions are set every frame)
+    const pulseState = Array.from({ length: isMobile ? PULSE_COUNT_MOBILE : PULSE_COUNT_DESKTOP }, () =>
+        Object.assign(randomPulse(), { t: Math.random() }));
+    const pulses = new THREE.Points(
+        geometry(THREE, { position: [new Float32Array(pulseState.length * 3), 3] }),
+        new THREE.PointsMaterial({ size: 1.3, map: glowTexture, color: COLOURS.aqua, transparent: true, depthWrite: false })
+    );
+    pulses.frustumCulled = false;
+    scene.add(pulses);
+
+    return {
+        clusters, nodeMaterial, linkMaterial, hubMaterial, backboneMaterial,
+        skillNodes, skillLinks, aboutGlow, pulses, pulseState
+    };
+}
+
+function randomPulse() {
+    return {
+        link: Math.floor(Math.random() * BACKBONE.length),
+        reverse: Math.random() < 0.5,
+        speed: PULSE_SPEED * (0.7 + Math.random() * 0.6)
+    };
 }
 
 function geometry(THREE, attributes) {
