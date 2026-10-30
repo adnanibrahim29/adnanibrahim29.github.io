@@ -378,26 +378,21 @@ nav a.active {
     color: gold;
 }
 
-.skills-container {
-    display: flex;
-    justify-content: space-around; /* This will space out the technical and soft skills evenly */
-    flex-wrap: wrap; /* Allows the sections to wrap on smaller screens */
-    gap: 20px; /* Adds space between the skill sections */
+.skill-group {
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 40px;
 }
-
-
 
 /* Progress Bar */
 .progress-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
-    justify-items: center;
-    align-items: center;
-    margin-bottom: -50px;
-    width: calc(3 * 150px + 2 * 20px + 40px); /* 3 cards + 2 gaps + padding */
-    height: calc(3 * 150px + 2 * 20px + 40px); /* Same for height */
+    list-style: none;
+    max-width: 900px;
+    margin: 30px auto 0;
 }
 
 .progress-bar .card {
@@ -770,25 +765,6 @@ nav a.active {
         margin: 10px;
     }
 
-    .Skills .words {
-        text-align: center;
-    }
-
-    .progress-bar {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-        grid-gap: 10px; /* Smaller gap between items */
-        justify-content: center;
-        align-items: center;
-        padding: 10px; /* Smaller padding if needed */
-        padding-left: 25%;
-        padding-right: 25%;
-    }
-
-    .soft-skill {
-        padding-top: 40%;
-    }
-
     .projects {
         padding-top: 70%;
         text-align: center;
@@ -865,17 +841,6 @@ nav a.active {
         max-width: 400px; /* Limit max width for larger screens */
         height: auto; /* Adjust height based on content */
     }
-
-    .progress-bar {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-        grid-gap: 10px; /* Smaller gap between items */
-        justify-content: center;
-        align-items: center;
-        padding: 10px; /* Smaller padding if needed */
-        padding-left: 30%;
-        padding-right: 30%;
-    }
 }
 
 /* Adjustments for very small devices (up to 320px wide) */
@@ -901,7 +866,7 @@ nav a.active {
         font-size: 20px; /* Reduce font size for titles and headings */
     }
 
-    .services-list, .skills-container, .projects .services-list {
+    .services-list, .projects .services-list {
         grid-template-columns: 1fr; /* Adjust layout for service lists and skills containers */
     }
 
