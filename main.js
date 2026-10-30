@@ -25,6 +25,8 @@ window.onscroll = () => {
     });
 };
 
+document.getElementById('year').textContent = new Date().getFullYear();
+
 function toggleReadMore() {
     var moreText = document.getElementById("more");
     var btnText = document.querySelector(".btn-box");
