@@ -39,11 +39,35 @@ html {
     transform-style: preserve-3d;
     transition: transform .3s ease-out;
 }
+/* Frosted-glass panels that keep text readable over the 3D scene */
+:root {
+    --glass-bg: rgba(19, 28, 47, .55);
+    --glass-blur: blur(10px);
+    --glass-border: 1px solid rgba(245, 222, 179, .15);
+}
+
 body {
     margin: auto;
     color: #f2f2f2;
-    background-color: #131c2f;
+    /* Also the fallback when the 3D scene can't load */
+    background: radial-gradient(ellipse at 50% 0%, #1f2d50 0%, #131c2f 60%) fixed #131c2f;
     overflow-y: hidden;
+}
+
+/* The 3D scene (js/scene.js): one fixed canvas behind all the content */
+#scene {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+#scene.is-ready {
+    opacity: 1;
 }
 
 body, html {
@@ -111,31 +135,12 @@ nav a.active {
     width: 100%;
     justify-content: space-between;
     height: 100vh;
-    background: url("images/background.jpg") no-repeat;
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     padding: 70px 10% 0;
 }
 
-/* Three.js backgrounds (js/*-scene.js) sit between the section background and its content */
-.scene-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 1.5s ease;
-}
-
-.scene-canvas.is-ready {
-    opacity: 1;
-}
-
-/* Darken the text side so the globe never competes with the copy */
+/* Darken the text side so the scene never competes with the copy */
 .home::before {
     content: "";
     position: absolute;
@@ -240,11 +245,22 @@ nav a.active {
 }
 
 .about-img img {
-    padding-bottom: 20%;
+    margin-bottom: 20%;
     max-width: 630px;
     height: auto;
     width: 100%;
-    border-radius: 8px;
+    /* The photo has a navy square around it; fade that out so the scene shows through */
+    -webkit-mask-image: radial-gradient(circle closest-side, #000 60%, transparent 78%);
+    mask-image: radial-gradient(circle closest-side, #000 60%, transparent 78%);
+}
+
+.about-text {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
 }
 
 .about-text h2{
@@ -268,8 +284,6 @@ nav a.active {
     color: white;
     font-size: 18px;
     line-height: 1.4;
-    margin-bottom: 4rem;
-    padding-right: 4rem;
 }
 
 /* Card sections: Experience, Education, Projects */
@@ -279,7 +293,6 @@ nav a.active {
     line-height: 1.4;
     margin-bottom: 4rem;
     text-align: center;
-    background: url("images/background.jpg") no-repeat;
 }
 
 .sub-title {
@@ -310,8 +323,9 @@ nav a.active {
 
 .services-list > * {
     position: relative;
-    background: #131c2f;
-    background-position: 50%;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
     color:gold;
     padding: 25px;
     font-size: 15px;
@@ -475,9 +489,14 @@ nav a.active {
 }
 
 .skill-group {
-    width: 100%;
-    padding: 0 20px;
+    width: min(1000px, 100% - 32px);
+    padding: 40px 20px 10px;
     margin-bottom: 40px;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 30px;
 }
 
 /* Progress Bar */
@@ -634,12 +653,6 @@ nav a.active {
     z-index: 1;
 }
 
-/* Fade the network out at the section edges instead of cutting it off */
-.contact-canvas {
-    -webkit-mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
-    mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
-}
-
 .contact-page .greeting{
     font-size: 30px;
     font-weight: 600;
@@ -697,9 +710,8 @@ nav a.active {
 .glass {
     width: min(800px, 100%);
     background: rgba(255, 255, 255, 0.1);
-    /* Frost the network behind the panel so it never competes with the text */
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
     box-shadow: 0 25px 45px rgba(0,0,0, .2);
     border-radius: 50px;
     border: 2px solid red;
@@ -865,11 +877,12 @@ nav a.active {
 
     .about-img img {
         max-width: 280px;
-        padding-bottom: 0;
+        margin-bottom: 0;
     }
 
     .about-text {
         text-align: center;
+        padding: 28px 18px;
     }
 
     .about-text h2 {
