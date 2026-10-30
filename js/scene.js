@@ -23,6 +23,8 @@ const CLUSTER_SPIN = 0.04;                // radians per second each cluster tur
 const FOG_DENSITY = 0.016;                // higher = distant nodes fade sooner
 const PARALLAX_STRENGTH = 1.2;            // how far the camera drifts toward the mouse
 const PARALLAX_EASING = 2;                // higher = camera follows the mouse faster
+const SCROLL_EASING = 3;                  // higher = camera catches up with the scroll position faster
+const NARROW_PULLBACK = 1.2;              // on portrait screens, move the camera back so the scene fits
 const MAX_PIXEL_RATIO = 2;
 
 // Cluster centres ("sites"). The first one is the highlighted node for About.
@@ -36,9 +38,19 @@ const SITES = [
 // Hub-to-hub links between sites
 const BACKBONE = [[0, 1], [1, 2], [2, 0], [1, 4], [2, 4], [0, 3], [3, 2]];
 const SKILLS_CENTRE = [0, 15, -4];
-const SKILLS_RADIUS = 4.5;
+const SKILLS_RADIUS = 7;
 
-const HERO_VIEW = { position: [0, 2, 30], target: [0, 0, 0] };
+// Camera stations, one per section in page order: where the camera sits and what it looks at.
+// Scrolling moves the camera along a smooth path through these, arriving as each section is centred.
+const STATIONS = [
+    { section: 'home', position: [0, 2, 30], target: [0, 0, 0] },
+    { section: 'about', position: [-7, 4, 6], target: SITES[0] },
+    { section: 'experience', position: [24, 6, 22], target: [9, -2, 2] },
+    { section: 'education', position: [-1, -2, -5], target: SITES[3] },
+    { section: 'skills', position: [0, 15, 7], target: SKILLS_CENTRE },
+    { section: 'projects', position: [0, 4, 24], target: [0, 0, 0] },
+    { section: 'contact', position: [0, 8, 44], target: [0, 0, 0] }
+];
 
 const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
 
@@ -69,11 +81,50 @@ async function init() {
     scene.fog = new THREE.FogExp2(COLOURS.navy, FOG_DENSITY);
 
     const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 200);
-    const cameraTarget = new THREE.Vector3(...HERO_VIEW.target);
-    camera.position.set(...HERO_VIEW.position);
 
     const glowTexture = createGlowTexture(THREE);
     const world = buildWorld(THREE, scene, glowTexture);
+
+    // Camera path through the stations
+    const positionPath = new THREE.CatmullRomCurve3(STATIONS.map(s => new THREE.Vector3(...s.position)), false, 'centripetal');
+    const targetPath = new THREE.CatmullRomCurve3(STATIONS.map(s => new THREE.Vector3(...s.target)), false, 'centripetal');
+    const cameraTarget = new THREE.Vector3();
+    const offset = new THREE.Vector3();
+    const right = new THREE.Vector3();
+    const up = new THREE.Vector3();
+    const worldUp = new THREE.Vector3(0, 1, 0);
+
+    // Scroll position where each station is reached: when its section is centred in the viewport
+    const sections = STATIONS.map(s => document.getElementById(s.section));
+    let stationScroll = [];
+
+    function measureStations() {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        let previous = 0;
+        stationScroll = sections.map((section, index) => {
+            let y = section ? section.offsetTop + section.offsetHeight / 2 - window.innerHeight / 2 : previous;
+            if (index === 0) y = 0;
+            if (index === sections.length - 1) y = maxScroll;
+            previous = Math.min(Math.max(y, previous), maxScroll);
+            return previous;
+        });
+    }
+
+    // Station index as a float: 2.5 means halfway between the 3rd and 4th stations
+    function scrollProgress() {
+        const y = window.scrollY;
+        for (let i = 0; i < stationScroll.length - 1; i++) {
+            const start = stationScroll[i];
+            const end = stationScroll[i + 1];
+            if (y <= end || i === stationScroll.length - 2) {
+                const t = end > start ? Math.min(Math.max((y - start) / (end - start), 0), 1) : 1;
+                return i + t * t * (3 - 2 * t); // smoothstep: linger at each station
+            }
+        }
+        return 0;
+    }
+
+    let progress = 0;
 
     // Mouse parallax: the camera eases toward an offset set by the pointer position
     const parallax = new THREE.Vector2();
@@ -94,13 +145,31 @@ async function init() {
 
         for (const cluster of world.clusters) cluster.rotation.y += CLUSTER_SPIN * delta;
 
+        progress += (scrollProgress() - progress) * (1 - Math.exp(-SCROLL_EASING * delta));
         parallax.lerp(parallaxTarget, 1 - Math.exp(-PARALLAX_EASING * delta));
-        camera.position.set(...HERO_VIEW.position);
-        camera.position.x += parallax.x * PARALLAX_STRENGTH;
-        camera.position.y += parallax.y * PARALLAX_STRENGTH;
-        camera.lookAt(cameraTarget);
+        placeCamera();
 
         renderer.render(scene, camera);
+    }
+
+    function placeCamera() {
+        const u = progress / (STATIONS.length - 1);
+        positionPath.getPoint(u, camera.position);
+        targetPath.getPoint(u, cameraTarget);
+
+        // Portrait screens see less sideways, so back the camera off along its line of sight
+        if (camera.aspect < 1) {
+            offset.subVectors(camera.position, cameraTarget).multiplyScalar(1 + (1 - camera.aspect) * NARROW_PULLBACK);
+            camera.position.addVectors(cameraTarget, offset);
+        }
+
+        // Parallax: nudge the camera sideways and up in its own frame
+        offset.subVectors(cameraTarget, camera.position).normalize();
+        right.crossVectors(offset, worldUp).normalize();
+        up.crossVectors(right, offset);
+        camera.position.addScaledVector(right, parallax.x * PARALLAX_STRENGTH);
+        camera.position.addScaledVector(up, parallax.y * PARALLAX_STRENGTH);
+        camera.lookAt(cameraTarget);
     }
 
     function updateLoop() {
@@ -112,6 +181,7 @@ async function init() {
         renderer.setSize(window.innerWidth, window.innerHeight, false);
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
+        measureStations();
     }
 
     function onContextLost(event) {
@@ -122,8 +192,12 @@ async function init() {
 
     document.body.prepend(canvas);
     resize();
+    // Start at the current scroll position (e.g. after a reload part-way down) instead of flying in
+    progress = scrollProgress();
 
     window.addEventListener('resize', resize);
+    // Section heights change as images, fonts and the typed text settle
+    new ResizeObserver(measureStations).observe(document.body);
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     document.addEventListener('visibilitychange', updateLoop);
     canvas.addEventListener('webglcontextlost', onContextLost);
