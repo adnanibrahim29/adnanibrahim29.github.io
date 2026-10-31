@@ -64,6 +64,7 @@ const STATIONS = [
 ];
 
 const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function webglAvailable() {
     try {
@@ -251,16 +252,32 @@ async function init() {
         camera.lookAt(cameraTarget);
     }
 
-    function updateLoop() {
-        lastTime = null;
-        renderer.setAnimationLoop(document.hidden ? null : tick);
+    // Reduced motion: one calm frame of the hero view, redrawn only when the window resizes
+    function renderStill() {
+        progress = 0;
+        updateEffects(0);
+        placeCamera();
+        renderer.render(scene, camera);
     }
 
+    function updateLoop() {
+        lastTime = null;
+        renderer.setAnimationLoop(reducedMotion || document.hidden ? null : tick);
+    }
+
+    // CSS keeps the canvas at the large viewport height, so a phone's address bar
+    // showing and hiding while scrolling doesn't resize (and redraw) the scene
+    const size = { width: 0, height: 0 };
+
     function resize() {
-        renderer.setSize(window.innerWidth, window.innerHeight, false);
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
         measureStations();
+        const { clientWidth: width, clientHeight: height } = canvas;
+        if (width === size.width && height === size.height) return;
+        Object.assign(size, { width, height });
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        if (reducedMotion) renderStill();
     }
 
     function onContextLost(event) {
@@ -277,7 +294,7 @@ async function init() {
     window.addEventListener('resize', resize);
     // Section heights change as images, fonts and the typed text settle
     new ResizeObserver(measureStations).observe(document.body);
-    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    if (!reducedMotion) window.addEventListener('pointermove', onPointerMove, { passive: true });
     // Phone tilt from the "Enable motion" button (js/tilt.js) moves the camera like the mouse does
     window.addEventListener('devicetilt', event => parallaxTarget.set(event.detail.x, event.detail.y));
     document.addEventListener('visibilitychange', updateLoop);
