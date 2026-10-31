@@ -29,7 +29,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
-    <!-- three.js for the hero and contact backgrounds (js/*-scene.js). Bump the version number here to upgrade. -->
+    <!-- three.js for the background scene (js/scene.js). Bump the version number here to upgrade. -->
     <script type="importmap">
         {
             "imports": {
@@ -37,8 +37,7 @@
             }
         }
     </script>
-    <script type="module" src="js/network-scene.js"></script>
-    <script type="module" src="js/globe-scene.js"></script>
+    <script type="module" src="js/scene.js"></script>
 
 </head>
 <body>
@@ -72,6 +71,9 @@
 
             <!-- TODO: add your current CV as CV.pdf in the repo root (it was deleted in commit 5f4a134) -->
             <a href = "CV.pdf" target='_blank' rel='noopener' class = "btn-box">RESUME</a>
+
+            <!-- Shown by js/tilt.js on touch devices that support phone tilt -->
+            <p><button type="button" class="motion-toggle" aria-pressed="false" hidden>Enable motion</button></p>
         </div>
     </section>
 
@@ -79,7 +81,7 @@
         <div class = "about-img" data-tilt="6">
             <img src = "images/me.png" alt = "Portrait of Adnan Ibrahim" width = "500" height = "500" data-aos="fade-right">
         </div>
-        <div class = "about-text">
+        <div class = "about-text" data-tilt="3">
             <h2 data-aos="fade-down">About <span>Me</span></h2>
             <p class = "about-role" data-aos="fade-up">Software Developer at IBM, Dublin</p>
             <p data-aos="fade-left">I'm a Software Developer at IBM in Dublin. I set up and automate
@@ -389,7 +391,7 @@
 
     <section  id="contact" class="contact"> 
         <div class = "contact-page">
-            <div class="glass">
+            <div class="glass" data-tilt="3">
                 <h2 data-aos="fade-right">Let's <span>Work</span> Together!</h2>
                 <p class="greeting" data-aos="fade-left"><span>Come</span> Connect <span>With</span> Me!</p>
                 <p data-aos="fade-right">Find me on <span>LinkedIn</span> and <span>GitHub</span>, or email me at
