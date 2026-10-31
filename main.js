@@ -1,10 +1,17 @@
-var typed = new Typed(".text", {
-    strings: ["Engineer", "Innovator", "Entrepreneur", "Developer", "Designer"],
-    typeSpeed: 100,
-    backspeed: 100,
-    backDelay: 1000,
-    loop:true
-})
+var heroWords = ["Engineer", "Innovator", "Entrepreneur", "Developer", "Designer"];
+
+// With reduced motion, show the first word instead of the looping typing animation
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelector('.text').textContent = heroWords[0];
+} else {
+    var typed = new Typed(".text", {
+        strings: heroWords,
+        typeSpeed: 100,
+        backspeed: 100,
+        backDelay: 1000,
+        loop:true
+    })
+}
 
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
