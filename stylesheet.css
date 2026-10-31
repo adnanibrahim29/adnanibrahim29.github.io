@@ -33,47 +33,12 @@ html {
     top: 16px;
 }
 
-/* 3D tilt: js/tilt.js sets the angles from the pointer, finger, scroll position or phone tilt */
+/* 3D tilt: js/tilt.js sets the angles from the pointer position */
 [data-tilt] {
-    transform: perspective(900px) translateY(var(--lift, 0px))
-        rotateX(calc(var(--tilt-x, 0deg) + var(--scroll-tilt, 0deg))) rotateY(var(--tilt-y, 0deg));
+    transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
     transform-style: preserve-3d;
     transition: transform .3s ease-out;
 }
-
-/* Let a finger drag sideways across a card to tilt it, while vertical scrolling and zoom still work */
-@media (hover: none) {
-    [data-tilt] {
-        touch-action: pan-y pinch-zoom;
-    }
-}
-
-/* "Enable motion" button in the hero for phone tilt (shown by js/tilt.js when supported) */
-.motion-toggle {
-    margin-top: 24px;
-    padding: 10px 16px;
-    font: inherit;
-    font-size: 14px;
-    color: white;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
-    border: 1px solid gold;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-.motion-toggle[aria-pressed="true"] {
-    color: #131c2f;
-    background: gold;
-}
-/* Frosted-glass panels that keep text readable over the 3D scene */
-:root {
-    --glass-bg: rgba(19, 28, 47, .55);
-    --glass-blur: blur(10px);
-    --glass-border: 1px solid rgba(245, 222, 179, .15);
-}
-
 body {
     margin: auto;
     color: #f2f2f2;
@@ -170,7 +135,23 @@ nav a.active {
     padding: 70px 10% 0;
 }
 
-/* Darken the text side so the scene never competes with the copy */
+/* Three.js backgrounds (js/*-scene.js) sit between the section background and its content */
+.scene-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.scene-canvas.is-ready {
+    opacity: 1;
+}
+
+/* Darken the text side so the globe never competes with the copy */
 .home::before {
     content: "";
     position: absolute;
@@ -353,9 +334,8 @@ nav a.active {
 
 .services-list > * {
     position: relative;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
+    background: #131c2f;
+    background-position: 50%;
     color:gold;
     padding: 25px;
     font-size: 15px;
@@ -483,8 +463,7 @@ nav a.active {
     transition: opacity .3s;
 }
 
-.services-list > [data-tilt]:hover::after,
-.services-list > [data-tilt].is-tilting::after {
+.services-list > [data-tilt]:hover::after {
     opacity: 1;
 }
 
@@ -520,14 +499,9 @@ nav a.active {
 }
 
 .skill-group {
-    width: min(1000px, 100% - 32px);
-    padding: 40px 20px 10px;
+    width: 100%;
+    padding: 0 20px;
     margin-bottom: 40px;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
-    border: var(--glass-border);
-    border-radius: 30px;
 }
 
 /* Progress Bar */
@@ -684,6 +658,12 @@ nav a.active {
     z-index: 1;
 }
 
+/* Fade the network out at the section edges instead of cutting it off */
+.contact-canvas {
+    -webkit-mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
+}
+
 .contact-page .greeting{
     font-size: 30px;
     font-weight: 600;
@@ -741,8 +721,9 @@ nav a.active {
 .glass {
     width: min(800px, 100%);
     background: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
+    /* Frost the network behind the panel so it never competes with the text */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 25px 45px rgba(0,0,0, .2);
     border-radius: 50px;
     border: 2px solid red;
@@ -835,12 +816,6 @@ nav a.active {
 
 /* Tablets and phones */
 @media (max-width: 768px) {
-    /* Blurring a moving 3D background is costly on phones; a more solid panel reads just as well */
-    :root {
-        --glass-bg: rgba(19, 28, 47, .82);
-        --glass-blur: none;
-    }
-
     html {
         scroll-padding-top: 120px;
     }
@@ -914,12 +889,11 @@ nav a.active {
 
     .about-img img {
         max-width: 280px;
-        margin-bottom: 0;
+        padding-bottom: 0;
     }
 
     .about-text {
         text-align: center;
-        padding: 28px 18px;
     }
 
     .about-text h2 {
@@ -991,7 +965,6 @@ nav a.active {
     }
 
     .glass {
-        background: var(--glass-bg);
         padding: 30px 16px;
         border-radius: 30px;
     }
