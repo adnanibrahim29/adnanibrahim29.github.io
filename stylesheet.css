@@ -42,8 +42,27 @@ html {
 body {
     margin: auto;
     color: #f2f2f2;
-    background-color: #131c2f;
+    /* Also the fallback when the 3D scene can't load */
+    background: radial-gradient(ellipse at 50% 0%, #1f2d50 0%, #131c2f 60%) fixed #131c2f;
     overflow-y: hidden;
+}
+
+/* The 3D scene (js/scene.js): one fixed canvas behind all the content */
+#scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+#scene.is-ready {
+    opacity: 1;
 }
 
 body, html {
@@ -111,9 +130,6 @@ nav a.active {
     width: 100%;
     justify-content: space-between;
     height: 100vh;
-    background: url("images/background.jpg") no-repeat;
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     padding: 70px 10% 0;
@@ -240,11 +256,22 @@ nav a.active {
 }
 
 .about-img img {
-    padding-bottom: 20%;
+    margin-bottom: 20%;
     max-width: 630px;
     height: auto;
     width: 100%;
-    border-radius: 8px;
+    /* The photo has a navy square around it; fade that out so the scene shows through */
+    -webkit-mask-image: radial-gradient(circle closest-side, #000 60%, transparent 78%);
+    mask-image: radial-gradient(circle closest-side, #000 60%, transparent 78%);
+}
+
+.about-text {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
 }
 
 .about-text h2{
@@ -268,8 +295,6 @@ nav a.active {
     color: white;
     font-size: 18px;
     line-height: 1.4;
-    margin-bottom: 4rem;
-    padding-right: 4rem;
 }
 
 /* Card sections: Experience, Education, Projects */
@@ -279,7 +304,6 @@ nav a.active {
     line-height: 1.4;
     margin-bottom: 4rem;
     text-align: center;
-    background: url("images/background.jpg") no-repeat;
 }
 
 .sub-title {
